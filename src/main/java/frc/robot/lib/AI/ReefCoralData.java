@@ -20,41 +20,37 @@ public class ReefCoralData {
     boolean L3L = false;
     int L3L_FailedCounter = 0;
 
-    public void setValue(CoralLiftState _coralState, AprilTagAlignState _aprilState){
-        switch(_coralState){
-            case ALGAE_HIGH:
-                break;
-            case ALGAE_LOW:
-                break;
-            case L1:
-                break;
+    public void setValue(CoralLiftState _coralState, AprilTagAlignState _aprilState) {
+        switch (_coralState) {
             case L2:
-                switch(_aprilState){
-                    case CENTER:
-                        break;
+                switch (_aprilState) {
                     case LEFT:
                         L2L = true;
                         break;
-                    case NONE:
-                        break;
                     case RIGHT:
+                        L2R = true;
                         break;
                     default:
                         break;
-                    
                 }
                 break;
             case L3:
-                break;
-            case LIFT_CLIMB_DOWN:
-                break;
-            case LIFT_CLIMB_UP:
+                switch (_aprilState) {
+                    case LEFT:
+                        L3L = true;
+                        break;
+                    case RIGHT:
+                        L3R = true;
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case START:
                 break;
             default:
                 break;
-            
+
         }
     }
 

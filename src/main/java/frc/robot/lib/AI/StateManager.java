@@ -29,13 +29,13 @@ public class StateManager {
         setRobotData(_state);
         lastState = _state;
     }
-    public void setRobotData(CoralLiftState _coralState, AprilTagAlignState _aprilState, RobotAlignStates _robotState){
+    private void setRobotData(CoralLiftState _coralState, AprilTagAlignState _aprilState, RobotAlignStates _robotState){
         g.CORALLIFT.state = _coralState;
         g.VISION.aprilTagAlignState = _aprilState;
         g.ROBOT.drive.setTargetRobotAngle(_robotState);
         reefMap.get(_robotState.toString()).setValue(_coralState, _aprilState);
     }
-    public void setRobotData(RobotAlignStates _state) {
+    private void setRobotData(RobotAlignStates _state) {
         if(!reefMap.get(_state.toString()).L3R) {
             setRobotData(CoralLiftState.L3, AprilTagAlignState.RIGHT, _state);
         }else if(!reefMap.get(_state.toString()).L3L) {
@@ -45,59 +45,5 @@ public class StateManager {
         }else if(!reefMap.get(_state.toString()).L2L) {
             setRobotData(CoralLiftState.L2, AprilTagAlignState.LEFT, _state);
         }
-
-        // switch (_state) {
-        //     case BACK:
-        //         if(!reefMap.get(_state.toString()).L3R) {
-        //             setRobotData(CoralLiftState.L3, AprilTagAlignState.RIGHT, _state);
-        //         }else if(!reefMap.get(_state.toString()).L3L) {
-        //             setRobotData(CoralLiftState.L3, AprilTagAlignState.LEFT, _state);
-        //         }else if(!reefMap.get(_state.toString()).L2R) {
-        //             setRobotData(CoralLiftState.L2, AprilTagAlignState.RIGHT, _state);
-        //         }else if(!reefMap.get(_state.toString()).L2L) {
-        //             setRobotData(CoralLiftState.L2, AprilTagAlignState.LEFT, _state);
-        //         }
-        //         break;
-        //     case BACK_LEFT:
-        //         reefMap.get("BACK_LEFT").L2R = true;
-        //         reefMap.get("BACK_LEFT").L3R = true;
-        //         reefMap.get("BACK_LEFT").L2L = true;
-        //         reefMap.get("BACK_LEFT").L3L = true;
-        //         break;
-        //     case BACK_RIGHT:
-        //         reefMap.get("BACK_RIGHT").L2R = true;
-        //         reefMap.get("BACK_RIGHT").L3R = true;
-        //         reefMap.get("BACK_RIGHT").L2L = true;
-        //         reefMap.get("BACK_RIGHT").L3L = true;
-        //         break;
-        //     case FRONT:
-        //         reefMap.get("FRONT").L2R = true;
-        //         reefMap.get("FRONT").L3R = true;
-        //         reefMap.get("FRONT").L2L = true;
-        //         reefMap.get("FRONT").L3L = true;
-        //         break;
-        //     case FRONT_LEFT:
-        //         reefMap.get("FRONT_LEFT").L2R = true;
-        //         reefMap.get("FRONT_LEFT").L3R = true;
-        //         reefMap.get("FRONT_LEFT").L2L = true;
-        //         reefMap.get("FRONT_LEFT").L3L = true;
-        //         break;
-        //     case FRONT_RIGHT:
-        //         reefMap.get("FRONT_RIGHT").L2R = true;
-        //         reefMap.get("FRONT_RIGHT").L3R = true;
-        //         reefMap.get("FRONT_RIGHT").L2L = true;
-        //         reefMap.get("FRONT_RIGHT").L3L = true;
-        //         break;
-        //     case STATION_LEFT:
-                
-        //         break;
-        //     case STATION_RIGHT:
-        //         break;
-        //     case UNKNOWN:
-        //         break;
-        //     default:
-        //         break;
-
-        // }
     }
 }
