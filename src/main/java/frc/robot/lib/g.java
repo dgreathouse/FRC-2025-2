@@ -33,10 +33,7 @@ import frc.robot.subsystems.SwerveModule;
 /** Add your docs here. */
 public class g {
   public static class ROBOT {
-    public static CoralLift coralLift = new CoralLift();
-    public static Drivetrain drive = new Drivetrain();
-    public static VisionProcessor vision = new VisionProcessor();
-    public static StateManager stateManager = new StateManager();
+
 
     public static final Pigeon2 gyro_pigeon2 = new Pigeon2(g.CAN_IDS_CANIVORE.PIGEON2, g.CAN_IDS_CANIVORE.NAME);
     public static final AHRS gyro_navx = new AHRS(NavXComType.kMXP_SPI);
@@ -59,13 +56,18 @@ public class g {
     public static final Pose2d POSE_START_RIGHT = new Pose2d(7.1374, 1.2192, new Rotation2d());
     public static final Pose2d POSE_START_CENTER = new Pose2d(7.1374, 4.064, new Rotation2d());
     public static final double TELEMETRY_RATE_sec = 0.02;
-    public static final long ODOMETRY_RATE_ms = 5;
+    public static final long ODOMETRY_RATE_ms = 10;
     public static volatile double centerDistanceToFrontBumper_m = 0.565;// 0.535;
     public static volatile double centerDistanceToBackBumper_m = 0.42211;
     public static volatile double centerDistanceToStationSide_m = 0.609;
     public static final double MAX_BATTERY_SUPPLY_volts = 12.8;
 
     public static RobotAlignStates alignmentState = RobotAlignStates.UNKNOWN;
+
+    public static CoralLift coralLift = new CoralLift();
+    public static Drivetrain drive = new Drivetrain();
+    public static VisionProcessor vision = new VisionProcessor();
+    public static StateManager stateManager = new StateManager();
  
   }
 
@@ -182,8 +184,8 @@ public class g {
     /** The data for the SWERVE Drive motors */
     public static class DRIVE {
 
-      private static final double MOTOR_PINION_TEETH = 12.0;
-      private static final double GEAR_1_TEETH = 32.0;
+      private static final double MOTOR_PINION_TEETH = 10.0;
+      private static final double GEAR_1_TEETH = 34.0;
       private static final double GEAR_2_DRIVE_TEETH = 28.0;
       private static final double GEAR_2_DRIVEN_TEETH = 18.0;
       private static final double GEAR_BEVEL_DRIVE_TEETH = 15.0;
@@ -260,7 +262,7 @@ public class g {
     public static volatile double driveSpeedError_mps = 0.0;
     public static final Vector<N3> STD_DEV_HIGH = VecBuilder.fill(0.15,0.15,0.15);
     public static final Vector<N3> STD_DEV_LOW = VecBuilder.fill(0.25,0.25,0.25);
-    public static final double DRIVE_SPEED_LOW_mps = 1;
+    public static final double DRIVE_SPEED_LOW_mps = 2;
     public static double turnPIDErrorDerivative = Double.POSITIVE_INFINITY;
 
   }
@@ -297,7 +299,7 @@ public class g {
     public static volatile TagFoundState tagState = TagFoundState.EMPTY;
     public static volatile Pose2d aprilTagRequestedPose = new Pose2d();
     public static volatile boolean isGlobalPoseResetActive = true; // Not implemented
-    public static final double AMBIGUITY_SETPOINT = 0.02;
+    public static final double AMBIGUITY_SETPOINT = 0.075;
     public static volatile double leftTargetAmbiguity = -1.0;
     public static volatile double rightTargetAmbiguity = -1.0;
     public static volatile Field2d field2d = new Field2d();

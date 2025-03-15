@@ -101,7 +101,7 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
         rotateToAngle(55);
         break;
       case START:
-        rotateToAngle(-73);
+        rotateToAngle(-60);
         break;
       case LIFT_CLIMB_UP:
         rotateToAngle(55);

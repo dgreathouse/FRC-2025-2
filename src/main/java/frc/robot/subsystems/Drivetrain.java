@@ -59,7 +59,7 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
         22,
         true,
         2,
-        0.428,
+        -0.462,
         g.CHASSIS.BACK_RIGHT_SWERVE_X_POSITION_m,
         g.CHASSIS.BACK_RIGHT_SWERVE_Y_POSITION_m);
     g.SWERVE.modules[1] = new SwerveModule(
@@ -69,7 +69,7 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
         23,
         true,
         3,
-        -0.152,
+        -0.495,
         g.CHASSIS.BACK_LEFT_SWERVE_X_POSITION_m,
         g.CHASSIS.BACK_LEFT_SWERVE_Y_POSITION_m);
     g.SWERVE.modules[2] = new SwerveModule(
@@ -79,7 +79,7 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
         21,
         true,
         1,
-        0.05835, // Gear on left of robot or right when looking at the front of the robot
+        0.21753, // Gear on left of robot or right when looking at the front of the robot
         g.CHASSIS.FRONT_SWERVE_X_POSITION_m,
         g.CHASSIS.FRONT_SWERVE_Y_POSITION_m);
     if (g.SWERVE.COUNT == 4) {

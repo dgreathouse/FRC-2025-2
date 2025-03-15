@@ -180,7 +180,7 @@ public class VisionProcessor implements IUpdateDashboard{
                             ambiguity = target.poseAmbiguity; // Get the ambiguity of the target
                             tagID = target.getFiducialId(); // Get the ID of the target
                             
-                            if(ambiguity >= 0 && ambiguity < g.VISION.AMBIGUITY_SETPOINT && g.DRIVETRAIN.driveSpeedActual_mps < 1.0){  // If the ambiguity is within the setpoint
+                            if(ambiguity >= 0 && ambiguity < g.VISION.AMBIGUITY_SETPOINT && g.DRIVETRAIN.driveSpeedActual_mps < g.DRIVETRAIN.DRIVE_SPEED_LOW_mps){  // If the ambiguity is within the setpoint
                                 if(tagState != TagFoundState.TARGET_ID_FOUND){  
                                     tagState = TagFoundState.TAG_FOUND; 
                                 }
