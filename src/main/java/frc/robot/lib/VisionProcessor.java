@@ -301,16 +301,17 @@ public class VisionProcessor implements IUpdateDashboard{
                 rtn = _alliance == Alliance.Blue ? 17 : 8;
                 break;
             case LEFT:
-                rtn = _alliance == Alliance.Blue ? 3 : 16;
+            
+                //rtn = _alliance == Alliance.Blue ? 3 : 16;
                 break;
             case RIGHT:
-                rtn = _alliance == Alliance.Blue ? 16 : 3;
+                //rtn = _alliance == Alliance.Blue ? 16 : 3;
                 break;
             case STATION_LEFT:
-                rtn = _alliance == Alliance.Blue ? 13 : 1;
+                //rtn = _alliance == Alliance.Blue ? 13 : 1;
                 break;
             case STATION_RIGHT:
-                rtn = _alliance == Alliance.Blue ? 12 : 2;
+                //rtn = _alliance == Alliance.Blue ? 12 : 2;
                 break;
             case UNKNOWN:
                 rtn = 0;
