@@ -44,10 +44,10 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
   double m_maxLiftDownVolts = -10;
 
   public CoralLift() {
-    m_rotatePID = new PIDController(7, 2, 0);
+    m_rotatePID = new PIDController(4, .5, 0);
     m_rotatePID.setIZone(Math.toRadians(7.5));
 
-    m_liftPID = new PIDController(1.25, 0.2, 0);
+    m_liftPID = new PIDController(1, 0.2, 0);
     m_liftPID.setIZone(20); // Sets the IZone range.
     m_liftPID.setIntegratorRange(-.1, .1); // Sets the Integrator range.
     m_liftPID.setTolerance(0.1); // Sets the tolerance
@@ -66,13 +66,13 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
         speed = 0.45;
         break;
       case L1:
-        speed = 0.15;
+        speed = 0.1;
         break;
       case L2:
-        speed = 0.25;
+        speed = 0.2;
         break;
       case L3:
-        speed = 0.15;
+        speed = 0.2;
         break;
       case START:
         break;
@@ -89,10 +89,10 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
         rotateToAngle(55);
         break;
       case L2:
-        rotateToAngle(60);
+        rotateToAngle(40);
         break;
       case L3:
-        rotateToAngle(20);
+        rotateToAngle(30);
         break;
       case ALGAE_HIGH:
         rotateToAngle(55);
@@ -101,7 +101,7 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
         rotateToAngle(55);
         break;
       case START:
-        rotateToAngle(-60);
+        rotateToAngle(-67.5);
         break;
       case LIFT_CLIMB_UP:
         rotateToAngle(55);
@@ -123,19 +123,19 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
         moveToPosition(0);
         break;
       case L3:
-        moveToPosition(370);
+        moveToPosition(406);
         break;
       case ALGAE_HIGH:
-        moveToPosition(400);
+        moveToPosition(406);
         break;
       case ALGAE_LOW:
-        moveToPosition(100);
+        moveToPosition(20);
         break;
       case START:
         moveToPosition(0);
         break;
       case LIFT_CLIMB_UP:
-        moveToPosition(350);
+        moveToPosition(35);
         break;
       case LIFT_CLIMB_DOWN:
         moveToPosition(100);

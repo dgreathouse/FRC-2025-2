@@ -39,7 +39,7 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
   private double m_yawSecondary = 0;
   private double m_angularVelocityZSecondary = 0;
   boolean m_isVisionEnabled = true;
-  private double m_speedScale = 0.75;
+  private double m_speedScale = 1.0;
   // TODO: Tune KP,KI,KD max output should be +/-1 Start around 1/3.14 for Kp
   private PIDController m_turnPID = new PIDController(0.45, 0.4, 0);
 
