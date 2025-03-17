@@ -14,23 +14,20 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.commandGroups.AutoBlueLeft2;
-import frc.robot.commandGroups.AutoBlueRight2;
+import frc.robot.commandGroups.Auto1;
 import frc.robot.commandGroups.AutoDoNothing;
-import frc.robot.commandGroups.AutoRedLeft2;
-import frc.robot.commandGroups.AutoRedRight2;
 import frc.robot.commands.coralLift.CoralLiftDefaultCommand;
 import frc.robot.commands.coralLift.CoralReverseCommand;
 import frc.robot.commands.drive.AutoDriveDefaultCommand;
 import frc.robot.commands.drive.DrivetrainDefaultCommand;
+import frc.robot.lib.AI;
 import frc.robot.lib.AprilTagAlignState;
-import frc.robot.lib.CoralArmState;
+
 import frc.robot.lib.CoralLiftState;
 import frc.robot.lib.DriveMode;
 import frc.robot.lib.IUpdateDashboard;
 import frc.robot.lib.RobotAlignStates;
 import frc.robot.lib.g;
-import frc.robot.subsystems.CoralLift;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
@@ -48,14 +45,20 @@ public class Robot extends TimedRobot {
     configureBindings();
 
     m_autoChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
-    m_autoChooser.addOption("Blue Right 2", new AutoBlueRight2(8));
-    m_autoChooser.addOption("Blue Left 2", new AutoBlueLeft2(0));
-    m_autoChooser.addOption("Red Left 2", new AutoRedLeft2(0));
-    m_autoChooser.addOption("Red Right 2", new AutoRedRight2(0));
+    m_autoChooser.addOption("Blue Right L2", new Auto1(22,AprilTagAlignState.RIGHT, CoralLiftState.L2));
+    m_autoChooser.addOption("Blue Left L2",  new Auto1(20,AprilTagAlignState.LEFT, CoralLiftState.L2));
+    m_autoChooser.addOption("Red Left L2",  new Auto1(11,AprilTagAlignState.LEFT, CoralLiftState.L2));
+    m_autoChooser.addOption("Red Right L2",  new Auto1(9,AprilTagAlignState.RIGHT, CoralLiftState.L2));
+    m_autoChooser.addOption("Blue Right L3", new Auto1(22,AprilTagAlignState.RIGHT, CoralLiftState.L3));
+    m_autoChooser.addOption("Blue Left L3",  new Auto1(20,AprilTagAlignState.LEFT, CoralLiftState.L3));
+    m_autoChooser.addOption("Red Left L3",  new Auto1(11,AprilTagAlignState.LEFT, CoralLiftState.L3));
+    m_autoChooser.addOption("Red Right L3",  new Auto1(9,AprilTagAlignState.RIGHT, CoralLiftState.L3));
     SmartDashboard.putData("Autonomouse Play", m_autoChooser);
+    SmartDashboard.putNumber("Auto/AutoDelay_sec" ,0);
 
     // Start telemetry in a slower rate than the main loop
     m_telemetry.startPeriodic(g.ROBOT.TELEMETRY_RATE_sec);
+    AI.initData();
     
   }
   private void configureBindings() {
@@ -70,6 +73,7 @@ public class Robot extends TimedRobot {
     //g.OI.DRIVER_TOGGLE_AUTO_DRIVE.onTrue(new InstantCommand(() -> {g.DRIVETRAIN.isAutoDriveEnabled = !g.DRIVETRAIN.isAutoDriveEnabled;}));
     g.OI.DRIVER_MODE_SPEED_TOGGLE.onTrue(new InstantCommand(() -> {g.ROBOT.drive.toggleSpeed();}));
     g.OI.DRIVER_CORAL_REVERSE.onTrue(new CoralReverseCommand());
+
 
     // Operator controls
     g.OI.OPERATOR_ALIGN_LEFT.onTrue(new InstantCommand(()-> {g.ROBOT.drive.setAprilTagAlignment(AprilTagAlignState.LEFT);}, g.ROBOT.drive));
@@ -93,12 +97,12 @@ public class Robot extends TimedRobot {
     g.OI.BB_CORAL_L1.onTrue(new InstantCommand(() ->{ g.CORALLIFT.state = CoralLiftState.L1; }, g.ROBOT.coralLift ));
     g.OI.BB_CORAL_START.onTrue(new InstantCommand(() ->{ g.CORALLIFT.state = CoralLiftState.START; }, g.ROBOT.coralLift ));
 
-     g.OI.BB_ROBOT_BACK.onTrue(new InstantCommand(() ->{ g.ROBOT.stateManager.setState(RobotAlignStates.BACK); }, g.ROBOT.drive, g.ROBOT.coralLift ));
-     g.OI.BB_ROBOT_BACK_RIGHT.onTrue(new InstantCommand(() ->{ g.ROBOT.stateManager.setState(RobotAlignStates.BACK_RIGHT); }, g.ROBOT.drive, g.ROBOT.coralLift  ));
-     g.OI.BB_ROBOT_BACK_LEFT.onTrue(new InstantCommand(() ->{ g.ROBOT.stateManager.setState(RobotAlignStates.BACK_LEFT); }, g.ROBOT.drive, g.ROBOT.coralLift  ));
-     g.OI.BB_ROBOT_FRONT.onTrue(new InstantCommand(() ->{ g.ROBOT.stateManager.setState(RobotAlignStates.FRONT); }, g.ROBOT.drive, g.ROBOT.coralLift  ));
-     g.OI.BB_ROBOT_FRONT_RIGHT.onTrue(new InstantCommand(() ->{ g.ROBOT.stateManager.setState(RobotAlignStates.FRONT_RIGHT); }, g.ROBOT.drive, g.ROBOT.coralLift  ));
-     g.OI.BB_ROBOT_FRONT_LEFT.onTrue(new InstantCommand(() ->{ g.ROBOT.stateManager.setState(RobotAlignStates.FRONT_LEFT); }, g.ROBOT.drive, g.ROBOT.coralLift  ));
+     g.OI.BB_ROBOT_BACK.onTrue(new InstantCommand(() ->{ AI.StateInput.setState(RobotAlignStates.BACK); }, g.ROBOT.drive, g.ROBOT.coralLift ));
+     g.OI.BB_ROBOT_BACK_RIGHT.onTrue(new InstantCommand(() ->{ AI.StateInput.setState(RobotAlignStates.BACK_RIGHT); }, g.ROBOT.drive, g.ROBOT.coralLift  ));
+     g.OI.BB_ROBOT_BACK_LEFT.onTrue(new InstantCommand(() ->{ AI.StateInput.setState(RobotAlignStates.BACK_LEFT); }, g.ROBOT.drive, g.ROBOT.coralLift  ));
+     g.OI.BB_ROBOT_FRONT.onTrue(new InstantCommand(() ->{ AI.StateInput.setState(RobotAlignStates.FRONT); }, g.ROBOT.drive, g.ROBOT.coralLift  ));
+     g.OI.BB_ROBOT_FRONT_RIGHT.onTrue(new InstantCommand(() ->{ AI.StateInput.setState(RobotAlignStates.FRONT_RIGHT); }, g.ROBOT.drive, g.ROBOT.coralLift  ));
+     g.OI.BB_ROBOT_FRONT_LEFT.onTrue(new InstantCommand(() ->{ AI.StateInput.setState(RobotAlignStates.FRONT_LEFT); }, g.ROBOT.drive, g.ROBOT.coralLift  ));
 
      g.OI.BB_LIFT_CLIMB_UP.onTrue(new InstantCommand(() ->{ g.CORALLIFT.state = CoralLiftState.LIFT_CLIMB_UP; }, g.ROBOT.coralLift ));
      g.OI.BB_LIFT_CLIMB_DOWN.onTrue(new InstantCommand(() ->{ g.CORALLIFT.state = CoralLiftState.LIFT_CLIMB_DOWN; }, g.ROBOT.coralLift ));

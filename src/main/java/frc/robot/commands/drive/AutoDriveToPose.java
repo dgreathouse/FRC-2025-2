@@ -1,7 +1,5 @@
 package frc.robot.commands.drive;
 
-import com.ctre.phoenix6.configs.GyroTrimConfigs;
-
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -11,6 +9,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.lib.AprilTagAlignState;
+import frc.robot.lib.CoralLiftState;
 import frc.robot.lib.DriveMode;
 import frc.robot.lib.g;
 
@@ -64,6 +63,7 @@ public class AutoDriveToPose extends Command {
 
   @Override
   public void execute() {
+    m_desiredPose = g.VISION.aprilTagRequestedPose;
     m_driveAngle_deg = m_desiredPose.getTranslation().minus(g.ROBOT.pose2d.getTranslation()).getAngle().getDegrees();
     m_driveDistance_m = g.ROBOT.pose2d.getTranslation().getDistance(m_desiredPose.getTranslation());
     
@@ -106,7 +106,7 @@ public class AutoDriveToPose extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(m_drivePID.atSetpoint() && m_turnPID.atSetpoint() || m_timer.hasElapsed(m_timeOut_sec)){
+    if(m_drivePID.atSetpoint() && m_turnPID.atSetpoint() || m_timer.hasElapsed(m_timeOut_sec) || g.CORALLIFT.state == CoralLiftState.START || g.OI.DRIVER_CORAL_OUT.getAsBoolean()){
       g.VISION.aprilTagAlignState = AprilTagAlignState.NONE;
       return true;
     }

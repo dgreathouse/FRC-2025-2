@@ -18,6 +18,7 @@ public class CoralLiftDefaultCommand extends Command {
 
   @Override
   public void execute() {
+    // Intake Spinner speeds
     if(g.OI.DRIVER_CORAL_IN.getAsBoolean()){
       g.ROBOT.coralLift.spin(0.15);
     }else if(g.OI.DRIVER_CORAL_OUT.getAsBoolean()){
@@ -25,7 +26,9 @@ public class CoralLiftDefaultCommand extends Command {
     }else {
       g.ROBOT.coralLift.spin(0);
     }
+    // Intake Arm Angle
     g.ROBOT.coralLift.rotate(g.CORALLIFT.state);
+    // Lift Height
     g.ROBOT.coralLift.moveLiftToPosition(g.CORALLIFT.state);
 
   }

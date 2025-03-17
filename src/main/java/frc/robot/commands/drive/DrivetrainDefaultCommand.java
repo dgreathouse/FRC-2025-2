@@ -5,8 +5,6 @@ import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.drive.AutoDriveToPose;
-import frc.robot.lib.DriveMode;
 import frc.robot.lib.g;
 
 public class DrivetrainDefaultCommand extends Command {
@@ -54,16 +52,15 @@ public class DrivetrainDefaultCommand extends Command {
     if(DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Red){
       redInvert = -1;
     }
-
+   
     if(g.ROBOT.vision.getIsAutoAprilTagActive()){
-      g.VISION.aprilTagRequestedPose = g.ROBOT.vision.getRobotPoseForAprilTag(g.VISION.aprilTagRequestedID, g.VISION.aprilTagAlignState);
+      //g.VISION.aprilTagRequestedPose = g.ROBOT.vision.getRobotPoseForAprilTag(g.VISION.aprilTagRequestedID, g.VISION.aprilTagAlignState);
       AutoDriveToPose autoPose = new AutoDriveToPose(g.VISION.aprilTagRequestedPose, 1, 5);
       autoPose.schedule();
     }else {
       switch (g.DRIVETRAIN.driveMode) {
         case FIELD_CENTRIC:
           g.ROBOT.drive.driveFieldCentric(leftXFiltered_Driver*redInvert, leftYFiltered_Driver*redInvert, rightYFiltered_Driver, g.ROBOT.angleActual_deg, g.DRIVETRAIN.centerOfRotation_m);
-
           break;
         case ANGLE_FIELD_CENTRIC:
           g.ROBOT.drive.setTargetRobotAngle(rightXFiltered_Driver*redInvert, rightYFiltered_Driver*redInvert);

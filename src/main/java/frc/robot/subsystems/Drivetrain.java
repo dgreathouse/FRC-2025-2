@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
+import frc.robot.lib.AI;
 import frc.robot.lib.AprilTagAlignState;
 
 import frc.robot.lib.CoralLiftState;
@@ -315,47 +316,38 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
    */
   public double setTargetRobotAngle(RobotAlignStates _state) {
      g.DRIVETRAIN.driveMode = DriveMode.ANGLE_FIELD_CENTRIC;
+     g.ROBOT.alignmentState = _state;
     switch (_state) {
       case BACK:
-        g.ROBOT.alignmentState = RobotAlignStates.BACK;
         g.ROBOT.angleRobotTarget_deg = setTargetRobotAngle(180.0);
         break;
       case BACK_LEFT:
-        g.ROBOT.alignmentState = RobotAlignStates.BACK_LEFT;
         g.ROBOT.angleRobotTarget_deg = setTargetRobotAngle(-120.0);
         break;
       case BACK_RIGHT:
-        g.ROBOT.alignmentState = RobotAlignStates.BACK_RIGHT;
         g.ROBOT.angleRobotTarget_deg = setTargetRobotAngle(120.0);
         break;
       case FRONT:
-        g.ROBOT.alignmentState = RobotAlignStates.FRONT;
         g.ROBOT.angleRobotTarget_deg = setTargetRobotAngle(0.0);
         break;
       case FRONT_LEFT:
-        g.ROBOT.alignmentState = RobotAlignStates.FRONT_LEFT;
         g.ROBOT.angleRobotTarget_deg = setTargetRobotAngle(-60.0);
         break;
       case FRONT_RIGHT:
-        g.ROBOT.alignmentState = RobotAlignStates.FRONT_RIGHT;
         g.ROBOT.angleRobotTarget_deg = setTargetRobotAngle(60.0);
         break;
       case LEFT:
-        g.ROBOT.alignmentState = RobotAlignStates.LEFT;
         g.ROBOT.angleRobotTarget_deg = setTargetRobotAngle(90.0);
         break;
       case RIGHT:
-        g.ROBOT.alignmentState = RobotAlignStates.RIGHT;
         g.ROBOT.angleRobotTarget_deg = setTargetRobotAngle(-90.0);
         break;
       case STATION_LEFT:
         g.CORALLIFT.state = CoralLiftState.START;
-        g.ROBOT.alignmentState = RobotAlignStates.STATION_LEFT;
         g.ROBOT.angleRobotTarget_deg = setTargetRobotAngle(-54.0);
         break;
       case STATION_RIGHT:
         g.CORALLIFT.state = CoralLiftState.START;
-        g.ROBOT.alignmentState = RobotAlignStates.STATION_RIGHT;
         g.ROBOT.angleRobotTarget_deg = setTargetRobotAngle(54.0);
         break;
       case UNKNOWN:
@@ -467,11 +459,14 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
   public void setAprilTagAlignment(AprilTagAlignState _alignState) {
     g.VISION.aprilTagAlignState = _alignState;
     setTargetRobotAngle(g.ROBOT.alignmentState);
+    if(g.ROBOT.alignmentState == RobotAlignStates.STATION_LEFT || g.ROBOT.alignmentState == RobotAlignStates.STATION_RIGHT){
+      AI.ReefModel.resetAprilTagState(_alignState);
+    }
   }
 
   public double getDriveSpeed() {
     double speed = 0.0;
-    ;
+    
     for (int i = 0; i < g.SWERVE.COUNT; i++) {
       speed = speed + g.SWERVE.modules[i].getDriveSpeed();
     }

@@ -190,7 +190,8 @@ public class VisionProcessor implements IUpdateDashboard{
                                     g.ROBOT.drive.addVisionMeasurement(pose, estimatedRobotPose.get().timestampSeconds); // Add the pose to the drive
                                     g.VISION.pose2d = Optional.of(pose); // Set the global vision pose to the pose
                                 }
-                                if(target.getFiducialId() == g.VISION.aprilTagRequestedID){ // If the target ID is the same as the requested ID
+                                if(target.getFiducialId() == g.VISION.aprilTagRequestedID){ // If the target ID is the sam as the requested ID
+                                    g.VISION.aprilTagRequestedPose = g.ROBOT.vision.getRobotPoseForAprilTag(g.VISION.aprilTagRequestedID, g.VISION.aprilTagAlignState);
                                     tagState = TagFoundState.TARGET_ID_FOUND; // Set the tagState to TARGET_ID_FOUND
                                 }
                             }
@@ -266,8 +267,7 @@ public class VisionProcessor implements IUpdateDashboard{
      * @return
      */
     public boolean getIsAutoAprilTagActive(){
-        if (g.VISION.aprilTagAlignState != AprilTagAlignState.NONE 
-            && g.VISION.tagState == TagFoundState.TARGET_ID_FOUND ) {
+        if (g.VISION.aprilTagAlignState != AprilTagAlignState.NONE && g.VISION.tagState == TagFoundState.TARGET_ID_FOUND ) {
             return true;
         }
         // if (g.VISION.aprilTagAlignState != AprilTagAlignState.NONE && g.DRIVETRAIN.isAutoDriveEnabled)

@@ -25,7 +25,7 @@ import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.lib.AI.StateManager;
+import frc.robot.lib.AI.StateInput;
 import frc.robot.subsystems.CoralLift;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.SwerveModule;
@@ -67,7 +67,7 @@ public class g {
     public static CoralLift coralLift = new CoralLift();
     public static Drivetrain drive = new Drivetrain();
     public static VisionProcessor vision = new VisionProcessor();
-    public static StateManager stateManager = new StateManager();
+
  
   }
 
@@ -209,7 +209,7 @@ public class g {
       public static double PID_KP = 1.0;
       public static double PID_KI = 0.20;
       public static double PID_KV = g.ROBOT.MAX_BATTERY_SUPPLY_volts / MAX_VELOCITY_mPsec; // 2.8256;
-      public static double PID_KS = 0.0;
+      public static double PID_KS = 0.01;
 
 
       public static final double STATOR_CURRENT_LIMIT_amps = 80;
