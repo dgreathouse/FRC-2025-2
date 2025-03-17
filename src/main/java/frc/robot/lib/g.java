@@ -25,7 +25,6 @@ import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.lib.AI.StateInput;
 import frc.robot.subsystems.CoralLift;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.SwerveModule;
