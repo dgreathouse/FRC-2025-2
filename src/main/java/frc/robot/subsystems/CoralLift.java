@@ -218,8 +218,7 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
   public void updateDashboard() {
     SmartDashboard.putString("CoralLift/CL_State", g.CORALLIFT.state.toString());
     SmartDashboard.putNumber("CoralLift/Arm Angle", getRotateAngle_deg());
-
     SmartDashboard.putNumber("CoralLift/Lift Distance mm", getPosition_mm());
-
+    SmartDashboard.putData("CoralLift/CoralLiftSubsystem", this);
   }
 }

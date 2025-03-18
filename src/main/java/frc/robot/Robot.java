@@ -45,10 +45,13 @@ public class Robot extends TimedRobot {
     configureBindings();
 
     m_autoChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
+
     m_autoChooser.addOption("Blue Right L2", new Auto1(22,AprilTagAlignState.RIGHT, CoralLiftState.L2));
     m_autoChooser.addOption("Blue Left L2",  new Auto1(20,AprilTagAlignState.LEFT, CoralLiftState.L2));
     m_autoChooser.addOption("Red Left L2",  new Auto1(11,AprilTagAlignState.LEFT, CoralLiftState.L2));
     m_autoChooser.addOption("Red Right L2",  new Auto1(9,AprilTagAlignState.RIGHT, CoralLiftState.L2));
+    m_autoChooser.addOption("Red Center L3", new Auto1(10,AprilTagAlignState.RIGHT, CoralLiftState.L3));
+    m_autoChooser.addOption("Blue Center L3", new Auto1(21,AprilTagAlignState.RIGHT, CoralLiftState.L3));
 
     SmartDashboard.putData("Autonomouse Play", m_autoChooser);
     SmartDashboard.putNumber("Auto/AutoDelay_sec" ,0);
