@@ -159,7 +159,16 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
     m_liftMotor.setControl(m_liftVoltageOut.withOutput(_volts));
 
   }
+  public void moveWithVoltage(double _volts, CoralLiftState _state) {
+    g.CORALLIFT.state = _state;
+    if(_volts > 0 && getPosition_mm() > 406) {
+      m_liftMotor.setControl(m_liftVoltageOut.withOutput(_volts));
+    }else{
+      m_liftMotor.setControl(m_liftVoltageOut.withOutput(0));
+    }
+    
 
+  }
   public void rotateToAngle(double _angle_deg) {
     double pid = m_rotatePID.calculate(Math.toRadians(getRotateAngle_deg()), Math.toRadians(_angle_deg));
     pid = MathUtil.clamp(pid, -8, 8);

@@ -49,10 +49,7 @@ public class Robot extends TimedRobot {
     m_autoChooser.addOption("Blue Left L2",  new Auto1(20,AprilTagAlignState.LEFT, CoralLiftState.L2));
     m_autoChooser.addOption("Red Left L2",  new Auto1(11,AprilTagAlignState.LEFT, CoralLiftState.L2));
     m_autoChooser.addOption("Red Right L2",  new Auto1(9,AprilTagAlignState.RIGHT, CoralLiftState.L2));
-    m_autoChooser.addOption("Blue Right L3", new Auto1(22,AprilTagAlignState.RIGHT, CoralLiftState.L3));
-    m_autoChooser.addOption("Blue Left L3",  new Auto1(20,AprilTagAlignState.LEFT, CoralLiftState.L3));
-    m_autoChooser.addOption("Red Left L3",  new Auto1(11,AprilTagAlignState.LEFT, CoralLiftState.L3));
-    m_autoChooser.addOption("Red Right L3",  new Auto1(9,AprilTagAlignState.RIGHT, CoralLiftState.L3));
+
     SmartDashboard.putData("Autonomouse Play", m_autoChooser);
     SmartDashboard.putNumber("Auto/AutoDelay_sec" ,0);
 
@@ -103,8 +100,11 @@ public class Robot extends TimedRobot {
      g.OI.BB_ROBOT_FRONT.onTrue(new InstantCommand(() ->{ AI.StateInput.setState(RobotAlignStates.FRONT); }, g.ROBOT.drive, g.ROBOT.coralLift  ));
      g.OI.BB_ROBOT_FRONT_RIGHT.onTrue(new InstantCommand(() ->{ AI.StateInput.setState(RobotAlignStates.FRONT_RIGHT); }, g.ROBOT.drive, g.ROBOT.coralLift  ));
      g.OI.BB_ROBOT_FRONT_LEFT.onTrue(new InstantCommand(() ->{ AI.StateInput.setState(RobotAlignStates.FRONT_LEFT); }, g.ROBOT.drive, g.ROBOT.coralLift  ));
+     g.OI.BB_LIFT_CLIMB_UP.onTrue(new InstantCommand(() ->{ g.ROBOT.coralLift.moveWithVoltage(6,CoralLiftState.LIFT_CLIMB_UP); }, g.ROBOT.coralLift ));
+     g.OI.BB_LIFT_CLIMB_UP.onFalse(new InstantCommand(() ->{ g.ROBOT.coralLift.moveWithVoltage(0,CoralLiftState.LIFT_CLIMB_UP);}, g.ROBOT.coralLift ));
 
-     g.OI.BB_LIFT_CLIMB_UP.onTrue(new InstantCommand(() ->{ g.CORALLIFT.state = CoralLiftState.LIFT_CLIMB_UP; }, g.ROBOT.coralLift ));
+
+     //g.OI.BB_LIFT_CLIMB_UP.onTrue(new InstantCommand(() ->{ g.CORALLIFT.state = CoralLiftState.LIFT_CLIMB_UP; }, g.ROBOT.coralLift ));
      g.OI.BB_LIFT_CLIMB_DOWN.onTrue(new InstantCommand(() ->{ g.CORALLIFT.state = CoralLiftState.LIFT_CLIMB_DOWN; }, g.ROBOT.coralLift ));
      
      g.OI.BB_ROBOT_STATION_LEFT.onTrue(new InstantCommand(() ->{ g.ROBOT.drive.setTargetRobotAngle(RobotAlignStates.STATION_LEFT); }, g.ROBOT.drive ));

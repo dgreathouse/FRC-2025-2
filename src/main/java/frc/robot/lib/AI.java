@@ -8,7 +8,9 @@ import java.util.HashMap;
 
 /** Add your docs here. */
 public class AI {
-
+    static RobotAlignStates m_previousRobotAlignState = RobotAlignStates.BACK;
+    static CoralLiftState m_previousCoralLiftState = CoralLiftState.START;
+    static AprilTagAlignState m_previousAprilTagAlignState = AprilTagAlignState.LEFT;
     public static void initData(){
         AI.ReefModel.dataModel.clear();
         AI.ReefModel.dataModel.put("BACK", new ReefSideModel());
@@ -24,6 +26,9 @@ public class AI {
              ReefModel.robotAlignState = _state;
              ReefModel.updateModel();
              StateOutput.setOutputData();
+             m_previousRobotAlignState = ReefModel.robotAlignState;
+             m_previousCoralLiftState = ReefModel.coralLiftState;
+             m_previousAprilTagAlignState = ReefModel.aprilTagAlignState;
         }
     }
     public static void clearModel(){
@@ -60,7 +65,7 @@ public class AI {
             }
         }
         public static void resetAprilTagState(AprilTagAlignState _aprilTagAlignState){
-            ReefSideModel rsm = dataModel.get(robotAlignState.toString());
+            ReefSideModel rsm = dataModel.get(m_previousRobotAlignState.toString());
             rsm.resetValue(_aprilTagAlignState);
         }
     }
@@ -80,7 +85,7 @@ public class AI {
 
         public void resetValue(AprilTagAlignState _aprilTagAlignState){
             
-            switch (ReefModel.coralLiftState) {
+            switch (m_previousCoralLiftState) {
                 case L2:
                     switch (_aprilTagAlignState) {
                         case LEFT:

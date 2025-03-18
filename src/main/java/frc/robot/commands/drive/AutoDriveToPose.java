@@ -63,11 +63,10 @@ public class AutoDriveToPose extends Command {
 
   @Override
   public void execute() {
-    m_desiredPose = g.VISION.aprilTagRequestedPose;
+    //m_desiredPose = g.VISION.aprilTagRequestedPose;
     m_driveAngle_deg = m_desiredPose.getTranslation().minus(g.ROBOT.pose2d.getTranslation()).getAngle().getDegrees();
     m_driveDistance_m = g.ROBOT.pose2d.getTranslation().getDistance(m_desiredPose.getTranslation());
     
-
     double speed = Math.abs(m_drivePID.calculate(m_driveDistance_m,0)); // Calculate the speed based on the distance to the target
     speed = MathUtil.clamp(speed, 0, m_speed); // Clamp the speed to the max speed
     speed = rampUpValue(speed, m_rampuUpTime_sec);  // Ramp up the speed
