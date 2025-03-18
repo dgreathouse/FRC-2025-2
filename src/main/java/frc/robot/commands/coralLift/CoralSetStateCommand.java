@@ -18,6 +18,11 @@ public class CoralSetStateCommand extends InstantCommand {
     addRequirements(g.ROBOT.coralLift);
   }
 
+  @Override
+  public void execute() {
+    g.CORALLIFT.state = m_state;
+  }
+
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
