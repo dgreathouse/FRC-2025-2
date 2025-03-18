@@ -178,7 +178,12 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
   private double getRotateAngle_deg() {
     return m_rotateMotor.getEncoder().getPosition() * 360 / g.CORAL.ROTATE_GEAR_RATIO;
   }
-
+  public boolean isCoralLiftAtSetPoint() {
+    if(m_rotatePID.atSetpoint() && m_liftPID.atSetpoint()) {
+      return true;
+    }
+    return false;
+  }
   public void spin(double _speed) {
     double volts = _speed * g.ROBOT.MAX_BATTERY_SUPPLY_volts;
     m_leftMotor.setControl(m_leftVoltageOut.withOutput(volts));

@@ -33,6 +33,7 @@ public class CoralSpinOutCommand extends Command {
   public void execute() {
     g.ROBOT.coralLift.spinOut(m_state);
     g.ROBOT.coralLift.rotate(m_state);
+    g.ROBOT.coralLift.moveLiftToPosition(m_state);
   }
 
   // Called once the command ends or is interrupted.

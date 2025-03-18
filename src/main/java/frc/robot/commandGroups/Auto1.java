@@ -4,7 +4,9 @@
 
 package frc.robot.commandGroups;
 
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.coralLift.CoralMoveToStateCommand;
 import frc.robot.commands.coralLift.CoralSetStateCommand;
 import frc.robot.commands.coralLift.CoralSpinOutCommand;
 import frc.robot.commands.drive.AutoDriveDelay;
@@ -27,8 +29,10 @@ public class Auto1 extends SequentialCommandGroup {
     addCommands(
       new AutoDriveDelay(),
       new AutoRotateToPose(g.ROBOT.vision.getRobotPoseForAprilTag(tagID, aprilTagAlignState), .3, 1),
-      new CoralSetStateCommand(_coralLiftState),
-      new AutoDriveToPose(g.ROBOT.vision.getRobotPoseForAprilTag(tagID, aprilTagAlignState), 0.5, 1.75),
+      new ParallelCommandGroup(
+        new CoralMoveToStateCommand(_coralLiftState, 1.75),
+        new AutoDriveToPose(g.ROBOT.vision.getRobotPoseForAprilTag(tagID, aprilTagAlignState), 0.5, 1.75)
+        ),
       new CoralSpinOutCommand(coralLiftState, 0.75),
       new CoralSetStateCommand(CoralLiftState.START) 
     );
