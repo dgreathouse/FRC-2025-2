@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commandGroups.Auto1;
+import frc.robot.commandGroups.AutoC;
 import frc.robot.commandGroups.AutoDoNothing;
 import frc.robot.commands.coralLift.CoralLiftDefaultCommand;
 import frc.robot.commands.coralLift.CoralReverseCommand;
@@ -46,12 +47,18 @@ public class Robot extends TimedRobot {
 
     m_autoChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
 
-    m_autoChooser.addOption("Blue Right L2", new Auto1(22,AprilTagAlignState.RIGHT, CoralLiftState.L2));
-    m_autoChooser.addOption("Blue Left L2",  new Auto1(20,AprilTagAlignState.LEFT, CoralLiftState.L2));
-    m_autoChooser.addOption("Red Left L2",  new Auto1(11,AprilTagAlignState.LEFT, CoralLiftState.L2));
-    m_autoChooser.addOption("Red Right L2",  new Auto1(9,AprilTagAlignState.RIGHT, CoralLiftState.L2));
-    m_autoChooser.addOption("Red Center L3", new Auto1(10,AprilTagAlignState.RIGHT, CoralLiftState.L3));
-    m_autoChooser.addOption("Blue Center L3", new Auto1(21,AprilTagAlignState.RIGHT, CoralLiftState.L3));
+    m_autoChooser.addOption("Blue Right RL2", new Auto1(22,AprilTagAlignState.RIGHT, CoralLiftState.L2));
+    m_autoChooser.addOption("Blue Right LL2", new Auto1(22,AprilTagAlignState.LEFT, CoralLiftState.L2));
+    m_autoChooser.addOption("Blue Left RL2",  new Auto1(20,AprilTagAlignState.RIGHT, CoralLiftState.L2));
+    m_autoChooser.addOption("Blue Left LL2",  new Auto1(20,AprilTagAlignState.LEFT, CoralLiftState.L2));
+    m_autoChooser.addOption("Red Left RL2",  new Auto1(11,AprilTagAlignState.RIGHT, CoralLiftState.L2));
+    m_autoChooser.addOption("Red Left LL2",  new Auto1(11,AprilTagAlignState.LEFT, CoralLiftState.L2));
+    m_autoChooser.addOption("Red Right RL2",  new Auto1(9,AprilTagAlignState.RIGHT, CoralLiftState.L2));
+    m_autoChooser.addOption("Red Right LL2",  new Auto1(9,AprilTagAlignState.LEFT, CoralLiftState.L2));
+    m_autoChooser.addOption("Red Center RL3", new AutoC(10,AprilTagAlignState.RIGHT, CoralLiftState.L3));
+    m_autoChooser.addOption("Red Center LL3", new AutoC(10,AprilTagAlignState.LEFT, CoralLiftState.L3));
+    m_autoChooser.addOption("Blue Center RL3", new AutoC(21,AprilTagAlignState.RIGHT, CoralLiftState.L3));
+    m_autoChooser.addOption("Blue Center LL3", new AutoC(21,AprilTagAlignState.LEFT, CoralLiftState.L3));
 
     SmartDashboard.putData("Autonomouse Play", m_autoChooser);
     SmartDashboard.putNumber("Auto/AutoDelay_sec" ,0);

@@ -49,7 +49,7 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
     m_rotatePID.setIntegratorRange(-.1, .1);
     m_rotatePID.setTolerance(Math.toRadians(1));
 
-    m_liftPID = new PIDController(1, 0.2, 0);
+    m_liftPID = new PIDController(0.5, 0, 0);
     m_liftPID.setIZone(20); // Sets the IZone range.
     m_liftPID.setIntegratorRange(-.1, .1); // Sets the Integrator range.
     m_liftPID.setTolerance(0.1); // Sets the tolerance
