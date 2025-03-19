@@ -44,8 +44,10 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
   double m_maxLiftDownVolts = -10;
 
   public CoralLift() {
-    m_rotatePID = new PIDController(4, .5, 0);
+    m_rotatePID = new PIDController(4, .05, 0);
     m_rotatePID.setIZone(Math.toRadians(7.5));
+    m_rotatePID.setIntegratorRange(-.1, .1);
+    m_rotatePID.setTolerance(Math.toRadians(1));
 
     m_liftPID = new PIDController(1, 0.2, 0);
     m_liftPID.setIZone(20); // Sets the IZone range.
