@@ -323,6 +323,15 @@ public class VisionProcessor implements IUpdateDashboard{
         return rtn;
 
     }
+    /**
+     * Get the robot alignment state based on the apriltag ID
+     * @param _aprilTagID
+     * @return RobotAlignStates
+     */
+    public RobotAlignStates getRobotAlignState(int _aprilTagID){
+        
+        return RobotAlignStates.UNKNOWN;
+    }
     @Override
     public void updateDashboard() {
         if(g.VISION.pose2d.isPresent()){

@@ -117,8 +117,8 @@ public class g {
     // Operator controller
     public static final int OPERATOR_CONTROLLER_PORT = 1;
     public static CommandPS5Controller operatorController = new CommandPS5Controller(OPERATOR_CONTROLLER_PORT);
-    public static final Trigger OPERATOR_ALIGN_LEFT = operatorController.square();
-    public static final Trigger OPERATOR_ALIGN_RIGHT = operatorController.circle();
+    public static final Trigger OPERATOR_STATION_LEFT_DEFENSE = operatorController.square();
+    public static final Trigger OPERATOR_STATION_RIGHT_DEFENSE = operatorController.circle();
     public static final Trigger OPERATOR_CORAL_L1 = operatorController.povUp();
     public static final Trigger OPERATOR_CORAL_L2 = operatorController.povLeft();
     public static final Trigger OPERATOR_CORAL_L3 = operatorController.povDown();

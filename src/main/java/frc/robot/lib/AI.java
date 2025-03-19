@@ -64,10 +64,14 @@ public class AI {
 
             }
         }
-        public static void resetAprilTagState(AprilTagAlignState _aprilTagAlignState){
+        public static void resetReefState(AprilTagAlignState _aprilTagAlignState){
             ReefSideModel rsm = dataModel.get(m_previousRobotAlignState.toString());
             rsm.resetValue(_aprilTagAlignState);
         }
+        public static void setReefState(RobotAlignStates _robotAlignState, CoralLiftState _coralLiftState, AprilTagAlignState _aprilTagAlignState ){
+            ReefSideModel rsm = dataModel.get(_robotAlignState.toString());
+            rsm.setValue(_coralLiftState, _aprilTagAlignState);
+        }   
     }
     public static class StateOutput{
         public static void setOutputData(){

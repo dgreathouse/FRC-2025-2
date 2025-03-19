@@ -350,6 +350,14 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
         g.CORALLIFT.state = CoralLiftState.START;
         g.ROBOT.angleRobotTarget_deg = setTargetRobotAngle(54.0);
         break;
+        case STATION_LEFT_DEFENSE:
+        g.CORALLIFT.state = CoralLiftState.START;
+        g.ROBOT.angleRobotTarget_deg = setTargetRobotAngle(-36.0);
+        break;
+      case STATION_RIGHT_DEFENSE:
+        g.CORALLIFT.state = CoralLiftState.START;
+        g.ROBOT.angleRobotTarget_deg = setTargetRobotAngle(36.0);
+        break;
       case UNKNOWN:
         g.ROBOT.alignmentState = RobotAlignStates.UNKNOWN;
         g.ROBOT.angleRobotTarget_deg = setTargetRobotAngle(0.0);
@@ -460,7 +468,7 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
     g.VISION.aprilTagAlignState = _alignState;
     setTargetRobotAngle(g.ROBOT.alignmentState);
     if(g.ROBOT.alignmentState == RobotAlignStates.STATION_LEFT || g.ROBOT.alignmentState == RobotAlignStates.STATION_RIGHT){
-      AI.ReefModel.resetAprilTagState(_alignState);
+      AI.ReefModel.resetReefState(_alignState);
     }
   }
 

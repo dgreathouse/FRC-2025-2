@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.coralLift.CoralMoveToStateCommand;
 import frc.robot.commands.coralLift.CoralSetStateCommand;
 import frc.robot.commands.coralLift.CoralSpinOutCommand;
+import frc.robot.commands.coralLift.SetCoralAIState;
 import frc.robot.commands.drive.AutoDriveDelay;
 import frc.robot.commands.drive.AutoDriveToPose;
 import frc.robot.commands.drive.AutoRotateToPose;
@@ -27,13 +28,14 @@ public class Auto1 extends SequentialCommandGroup {
     coralLiftState = _coralLiftState;
     
     addCommands(
+      new SetCoralAIState(g.ROBOT.vision.getRobotAlignState(_tagID), _coralLiftState, _aprilTagAlignState), // TODO finish implementation of VisionProcessor.getRobotAlignState(tagID)
       new AutoDriveDelay(),
       new AutoRotateToPose(g.ROBOT.vision.getRobotPoseForAprilTag(tagID, aprilTagAlignState), .3, 1),
       new ParallelCommandGroup(
-        new CoralMoveToStateCommand(_coralLiftState, 1.75),
-        new AutoDriveToPose(g.ROBOT.vision.getRobotPoseForAprilTag(tagID, aprilTagAlignState), 0.5, 1.75)
+        new CoralMoveToStateCommand(_coralLiftState, 2),
+        new AutoDriveToPose(g.ROBOT.vision.getRobotPoseForAprilTag(tagID, aprilTagAlignState), 0.5, 2)
         ),
-      new CoralSpinOutCommand(coralLiftState, 0.75),
+      new CoralSpinOutCommand(coralLiftState, 1),
       new CoralSetStateCommand(CoralLiftState.START) 
     );
   }
