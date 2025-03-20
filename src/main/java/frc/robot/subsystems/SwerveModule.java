@@ -180,7 +180,7 @@ public class SwerveModule implements IUpdateDashboard {
       m_driveMotor.setControl(m_driveVoltageOut.withOutput(0));
     }
     /*-------------------- Steer---------------------*/
-    if (g.SWERVE.isEnabled && Math.abs(driveVolts) > 0.01) {
+    if (g.SWERVE.isEnabled && Math.abs(driveVolts) > 0.01) { // TODO Tune this steer enable for drive volts threshold
 
       double steerVolts = m_steerPID.calculate(m_position.angle.getDegrees(), _state.angle.getDegrees());
       

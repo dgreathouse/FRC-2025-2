@@ -52,8 +52,9 @@ public class DrivetrainDefaultCommand extends Command {
     if(DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Red){
       redInvert = -1;
     }
-   
-    if(g.ROBOT.vision.getIsAutoAprilTagActive()){
+    double driveDistance_m = g.ROBOT.pose2d.getTranslation().getDistance(g.VISION.aprilTagRequestedPose.getTranslation());
+    if(g.ROBOT.vision.getIsAutoAprilTagActive() && driveDistance_m > 2 && driveDistance_m > 1){
+      
       //g.VISION.aprilTagRequestedPose = g.ROBOT.vision.getRobotPoseForAprilTag(g.VISION.aprilTagRequestedID, g.VISION.aprilTagAlignState);
       new AutoDriveToPose(g.VISION.aprilTagRequestedPose, 1, 5).schedule();
       

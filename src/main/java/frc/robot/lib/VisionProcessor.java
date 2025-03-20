@@ -328,56 +328,38 @@ public class VisionProcessor implements IUpdateDashboard{
      * @param _aprilTagID
      * @return RobotAlignStates
      */
-    public RobotAlignStates getRobotAlignState(int _aprilTagID){
+    public RobotAlignStates getRobotAlignState(int _aprilTagID) {
+        RobotAlignStates state = RobotAlignStates.UNKNOWN;
         switch (_aprilTagID) {
-            case 1:
-                return RobotAlignStates.STATION_LEFT;
-            case 2:
-                return RobotAlignStates.STATION_RIGHT;
-            case 3:
-                return RobotAlignStates.UNKNOWN;
-            case 4:
-                return RobotAlignStates.UNKNOWN;
-            case 5:
-                return RobotAlignStates.UNKNOWN;
-            case 6:
-                return RobotAlignStates.FRONT_RIGHT;
-            case 7:
-                return RobotAlignStates.FRONT;
-            case 8:
-                return RobotAlignStates.FRONT_LEFT;
-            case 9:
-                return RobotAlignStates.BACK_LEFT;
-            case 10:
-                return RobotAlignStates.BACK;
-            case 11:
-                return RobotAlignStates.BACK_RIGHT;
-            case 12:
-                return RobotAlignStates.STATION_RIGHT;
-            case 13:
-                return RobotAlignStates.STATION_LEFT;
-            case 14:
-                return RobotAlignStates.UNKNOWN;
-            case 15:
-                return RobotAlignStates.UNKNOWN;
-            case 16:
-                return RobotAlignStates.UNKNOWN;
-            case 17:
-                return RobotAlignStates.FRONT_RIGHT;
-            case 18:
-                return RobotAlignStates.FRONT;
-            case 19:
-                return RobotAlignStates.FRONT_LEFT;
-            case 20:
-                return RobotAlignStates.BACK_LEFT;
             case 21:
-                return RobotAlignStates.BACK;
+            case 10:
+                state = RobotAlignStates.BACK;
+                break;
+            case 20:
+            case 11:
+                state = RobotAlignStates.BACK_LEFT;
+                break;
             case 22:
-                return RobotAlignStates.BACK_RIGHT;
+            case 9:
+                state = RobotAlignStates.BACK_RIGHT;
+                break;
+            case 18:
+            case 7:
+                state = RobotAlignStates.FRONT;
+                break;
+            case 19:
+            case 6:
+                state = RobotAlignStates.FRONT_LEFT;
+                break;
+            case 17:
+            case 8:
+                state = RobotAlignStates.FRONT_RIGHT;
+                break;
             default:
-                return RobotAlignStates.UNKNOWN;
+                state = RobotAlignStates.UNKNOWN;
+                break;
         }
-    
+        return state;
     }
     @Override
     public void updateDashboard() {
