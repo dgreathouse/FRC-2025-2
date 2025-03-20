@@ -31,9 +31,7 @@ public class AI {
              m_previousAprilTagAlignState = ReefModel.aprilTagAlignState;
         }
     }
-    public static void clearModel(){
-        AI.initData();
-    }
+
     public static class ReefModel {
         public static HashMap<String, ReefSideModel> dataModel = new HashMap<>();
 
@@ -66,7 +64,7 @@ public class AI {
         }
         public static void resetReefState(AprilTagAlignState _aprilTagAlignState){
             ReefSideModel rsm = dataModel.get(m_previousRobotAlignState.toString());
-            rsm.resetValue(_aprilTagAlignState);
+            rsm.resetValue(m_previousCoralLiftState, _aprilTagAlignState);
         }
         public static void setReefState(RobotAlignStates _robotAlignState, CoralLiftState _coralLiftState, AprilTagAlignState _aprilTagAlignState ){
             ReefSideModel rsm = dataModel.get(_robotAlignState.toString());
@@ -87,9 +85,9 @@ public class AI {
         public boolean Level2L = false;
         public boolean Level3L = false;
 
-        public void resetValue(AprilTagAlignState _aprilTagAlignState){
+        public void resetValue(CoralLiftState _coralLiftState, AprilTagAlignState _aprilTagAlignState){
             
-            switch (m_previousCoralLiftState) {
+            switch (_coralLiftState) {
                 case L2:
                     switch (_aprilTagAlignState) {
                         case LEFT:

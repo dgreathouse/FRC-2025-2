@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.commandGroups;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
@@ -17,18 +13,18 @@ import frc.robot.lib.AprilTagAlignState;
 import frc.robot.lib.CoralLiftState;
 import frc.robot.lib.g;
 
-public class Auto1 extends SequentialCommandGroup {
+public class AutoRightOrLeft extends SequentialCommandGroup {
   int tagID;
   AprilTagAlignState aprilTagAlignState;
   CoralLiftState coralLiftState;
 
-  public Auto1(int _tagID, AprilTagAlignState _aprilTagAlignState, CoralLiftState _coralLiftState) {
+  public AutoRightOrLeft(int _tagID, AprilTagAlignState _aprilTagAlignState, CoralLiftState _coralLiftState) {
     tagID = _tagID;
     aprilTagAlignState = _aprilTagAlignState;
     coralLiftState = _coralLiftState;
     
     addCommands(
-      //new SetCoralAIState(g.ROBOT.vision.getRobotAlignState(_tagID), _coralLiftState, _aprilTagAlignState), // TODO finish implementation of VisionProcessor.getRobotAlignState(tagID)
+      new SetCoralAIState(g.ROBOT.vision.getRobotAlignState(_tagID), _coralLiftState, _aprilTagAlignState),
       new AutoDriveDelay(),
       new AutoRotateToPose(g.ROBOT.vision.getRobotPoseForAprilTag(tagID, aprilTagAlignState), .3, 1),
       new ParallelCommandGroup(
@@ -36,7 +32,6 @@ public class Auto1 extends SequentialCommandGroup {
         new AutoDriveToPose(g.ROBOT.vision.getRobotPoseForAprilTag(tagID, aprilTagAlignState), 0.5, 2)
         ),
       new CoralSpinOutCommand(coralLiftState, 1),
-      new CoralSetStateCommand(CoralLiftState.ALGAE_LOW),
       new CoralSetStateCommand(CoralLiftState.START) 
     );
   }
