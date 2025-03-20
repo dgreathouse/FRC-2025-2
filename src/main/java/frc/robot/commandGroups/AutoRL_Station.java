@@ -2,6 +2,7 @@ package frc.robot.commandGroups;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.coralLift.CoralLiftSetStateAndSpin;
 import frc.robot.commands.coralLift.CoralMoveToStateCommand;
 import frc.robot.commands.coralLift.CoralSetStateCommand;
 import frc.robot.commands.coralLift.CoralSpinInCommand;
@@ -25,7 +26,7 @@ public class AutoRL_Station extends SequentialCommandGroup {
     coralLiftState = _coralLiftState;
     
     addCommands(
-      new SetCoralAIState(g.ROBOT.vision.getRobotAlignState(_tagID), _coralLiftState, _aprilTagAlignState),
+      // new SetCoralAIState(g.ROBOT.vision.getRobotAlignState(_tagID), _coralLiftState, _aprilTagAlignState),
       new AutoDriveDelay(),
       new AutoRotateToPose(g.ROBOT.vision.getRobotPoseForAprilTag(tagID, aprilTagAlignState), .3, 1),
       new ParallelCommandGroup(
@@ -42,7 +43,8 @@ public class AutoRL_Station extends SequentialCommandGroup {
         new CoralMoveToStateCommand(coralLiftState, 1)
       ),
       new CoralSpinOutCommand(coralLiftState, 1),
-      new CoralSetStateCommand(CoralLiftState.START)
+      new CoralLiftSetStateAndSpin(CoralLiftState.ALGAE_LOW,1),
+      new CoralMoveToStateCommand(CoralLiftState.START, 2)
     );
   }
 }

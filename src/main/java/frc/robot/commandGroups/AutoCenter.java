@@ -25,7 +25,7 @@ public class AutoCenter extends SequentialCommandGroup {
     coralLiftState = _coralLiftState;
     
     addCommands(
-      new SetCoralAIState(g.ROBOT.vision.getRobotAlignState(_tagID), _coralLiftState, _aprilTagAlignState), 
+      // new SetCoralAIState(g.ROBOT.vision.getRobotAlignState(_tagID), _coralLiftState, _aprilTagAlignState), 
       new AutoDriveDelay(),
       new AutoRotateToPose(g.ROBOT.vision.getRobotPoseForAprilTag(tagID, aprilTagAlignState), .3, 1),
       new ParallelCommandGroup(

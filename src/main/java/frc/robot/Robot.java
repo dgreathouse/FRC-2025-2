@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commandGroups.AutoRightOrLeft;
 import frc.robot.commandGroups.AutoCenter;
 import frc.robot.commandGroups.AutoDoNothing;
+import frc.robot.commandGroups.AutoRL_Station;
 import frc.robot.commands.coralLift.CoralLiftDefaultCommand;
 import frc.robot.commands.coralLift.CoralReverseCommand;
 import frc.robot.commands.drive.AutoDriveDefaultCommand;
@@ -59,6 +60,7 @@ public class Robot extends TimedRobot {
     m_autoChooser.addOption("Red Center LL3", new AutoCenter(10,AprilTagAlignState.LEFT, CoralLiftState.L3));
     m_autoChooser.addOption("Blue Center RL3", new AutoCenter(21,AprilTagAlignState.RIGHT, CoralLiftState.L3));
     m_autoChooser.addOption("Blue Center LL3", new AutoCenter(21,AprilTagAlignState.LEFT, CoralLiftState.L3));
+    m_autoChooser.addOption("Blue Left L23", new AutoRL_Station(20,AprilTagAlignState.LEFT, CoralLiftState.L3));
 
     SmartDashboard.putData("Autonomouse Play", m_autoChooser);
     SmartDashboard.putNumber("Auto/AutoDelay_sec" ,0);
