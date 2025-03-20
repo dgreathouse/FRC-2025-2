@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.coralLift.CoralMoveToStateCommand;
 import frc.robot.commands.coralLift.CoralSetStateCommand;
+import frc.robot.commands.coralLift.CoralSpinInCommand;
 import frc.robot.commands.coralLift.CoralSpinOutCommand;
 import frc.robot.commands.coralLift.SetCoralAIState;
 import frc.robot.commands.drive.AutoDriveDelay;
@@ -33,7 +34,15 @@ public class AutoRL_Station extends SequentialCommandGroup {
         ),
       new CoralSpinOutCommand(coralLiftState, 1),
       new AutoRotateToPose(g.ROBOT.vision.getRobotPoseForAprilTag(tagID, aprilTagAlignState), .3, 1),
-      new CoralSetStateCommand(CoralLiftState.START) 
+      new AutoRL_Station(_tagID, _aprilTagAlignState, CoralLiftState.START),
+      new CoralSpinInCommand(coralLiftState, 1),
+      new AutoRotateToPose(g.ROBOT.vision.getRobotPoseForAprilTag(tagID, aprilTagAlignState), .3, 1),
+      new ParallelCommandGroup(
+        new AutoDriveToPose(g.ROBOT.vision.getRobotPoseForAprilTag(tagID, aprilTagAlignState), .5, 2),
+        new CoralMoveToStateCommand(coralLiftState, 1)
+      ),
+      new CoralSpinOutCommand(coralLiftState, 1),
+      new CoralSetStateCommand(CoralLiftState.START)
     );
   }
 }
