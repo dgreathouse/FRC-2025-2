@@ -117,14 +117,14 @@ public class g {
     // Operator controller
     public static final int OPERATOR_CONTROLLER_PORT = 1;
     public static CommandPS5Controller operatorController = new CommandPS5Controller(OPERATOR_CONTROLLER_PORT);
-    public static final Trigger OPERATOR_STATION_LEFT_DEFENSE = operatorController.square();
-    public static final Trigger OPERATOR_STATION_RIGHT_DEFENSE = operatorController.circle();
-    public static final Trigger OPERATOR_CORAL_L1 = operatorController.povUp();
-    public static final Trigger OPERATOR_CORAL_L2 = operatorController.povLeft();
-    public static final Trigger OPERATOR_CORAL_L3 = operatorController.povDown();
-    public static final Trigger OPERATOR_ALGAE_HIGH = operatorController.R2();
-    public static final Trigger OPERATOR_ALGAE_LOW = operatorController.L2();
-    public static final Trigger OPERATOR_CORAL_START = operatorController.L1();
+   // public static final Trigger OPERATOR_STATION_LEFT_DEFENSE = operatorController.square();
+   // public static final Trigger OPERATOR_STATION_RIGHT_DEFENSE = operatorController.circle();
+    //public static final Trigger OPERATOR_CORAL_L1 = operatorController.povUp();
+    public static final Trigger OPERATOR_CORAL_L2 = operatorController.cross();
+    public static final Trigger OPERATOR_CORAL_L3 = operatorController.triangle();
+    public static final Trigger OPERATOR_ALGAE_HIGH = operatorController.povUp();
+    public static final Trigger OPERATOR_ALGAE_LOW = operatorController.povDown();
+    public static final Trigger OPERATOR_CORAL_START = operatorController.touchpad();
     public static final Trigger OPERATOR_LIFT_CLIMB_UP = operatorController.R1();
     public static final Trigger OPERATOR_LIFT_CLIMB_DOWN = operatorController.L1();
 

@@ -294,7 +294,69 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
       }
     }
   }
+  public void setAITargetRobotAngle(double _x, double _y) {
+    
+    double x = _x;
+    double y = _y;
+    double hyp = Math.hypot(x, y); // Always positive
+    double joystickAngle = Math.toDegrees(Math.atan2(y, x));
 
+    if (Math.abs(hyp) > g.OI.THUMBSTICK_AXIS_ANGLE_DEADBAND) {
+      if (joystickAngle >= -30 && joystickAngle <= 30) { // North
+        setTargetRobotAngle(RobotAlignStates.FRONT);
+      } else if (joystickAngle >= -90 && joystickAngle < -30) { // North East
+        setTargetRobotAngle(RobotAlignStates.FRONT_LEFT);
+      } else if (joystickAngle >= -150 && joystickAngle < -90) { // South East
+        setTargetRobotAngle(RobotAlignStates.BACK_LEFT);
+      } else if ((joystickAngle >= 150 && joystickAngle <= 180.0)
+          || (joystickAngle <= -150 && joystickAngle > -180)) { // South
+        setTargetRobotAngle(RobotAlignStates.BACK);
+      } else if (joystickAngle <= 90 && joystickAngle > 30) { // North West
+        setTargetRobotAngle(RobotAlignStates.FRONT_RIGHT);
+      } else if (joystickAngle <= 150 && joystickAngle > 90) { // South West
+        setTargetRobotAngle(RobotAlignStates.BACK_RIGHT);
+      }
+    }
+  }
+  public void setAITargetRobotAngle(RobotAlignStates _state){
+    switch (_state) {
+      case BACK:
+        AI.StateInput.setState(RobotAlignStates.BACK);
+        break;
+      case BACK_LEFT:
+        AI.StateInput.setState(RobotAlignStates.BACK_LEFT);
+        break;
+      case BACK_RIGHT:
+        AI.StateInput.setState(RobotAlignStates.BACK_RIGHT);
+        break;
+      case FRONT:
+        AI.StateInput.setState(RobotAlignStates.FRONT);
+        break;
+      case FRONT_LEFT:
+        AI.StateInput.setState(RobotAlignStates.FRONT_LEFT);
+        break;
+      case FRONT_RIGHT:
+        AI.StateInput.setState(RobotAlignStates.FRONT_RIGHT);
+        break;
+      default:
+        g.ROBOT.angleRobotTarget_deg = setTargetRobotAngle(0.0);
+        break;
+    }
+  }
+  public void setDefenseTargetRobotAngle(double _x, double _y){
+    double x = _x;
+    double y = _y;
+    double hyp = Math.hypot(x, y); // Always positive
+    double joystickAngle = Math.toDegrees(Math.atan2(y, x));
+
+    if (Math.abs(hyp) > g.OI.THUMBSTICK_AXIS_ANGLE_DEADBAND) {
+      if (joystickAngle >= 0) { 
+        setTargetRobotAngle(36);
+      } else if (joystickAngle < 0 ) { // North East
+        setTargetRobotAngle(-36);
+      }
+    }
+  }
   /*
    * There are the following states for the robot to react to.
    * 1. g.ROBOT.alignmentState

@@ -85,9 +85,9 @@ public class Robot extends TimedRobot {
 
 
     // Operator controls
-    g.OI.OPERATOR_STATION_LEFT_DEFENSE.onTrue(new InstantCommand(()-> {g.ROBOT.drive.setTargetRobotAngle(RobotAlignStates.STATION_LEFT_DEFENSE); }, g.ROBOT.drive));
-    g.OI.OPERATOR_STATION_RIGHT_DEFENSE.onTrue(new InstantCommand(()-> {g.ROBOT.drive.setTargetRobotAngle(RobotAlignStates.STATION_RIGHT_DEFENSE); }, g.ROBOT.drive));
-    g.OI.OPERATOR_CORAL_L1.onTrue(new InstantCommand(()-> {g.CORALLIFT.state = CoralLiftState.L1;}, g.ROBOT.coralLift));
+    //g.OI.OPERATOR_STATION_LEFT_DEFENSE.onTrue(new InstantCommand(()-> {g.ROBOT.drive.setTargetRobotAngle(RobotAlignStates.STATION_LEFT_DEFENSE); }, g.ROBOT.drive));
+   // g.OI.OPERATOR_STATION_RIGHT_DEFENSE.onTrue(new InstantCommand(()-> {g.ROBOT.drive.setTargetRobotAngle(RobotAlignStates.STATION_RIGHT_DEFENSE); }, g.ROBOT.drive));
+    //g.OI.OPERATOR_CORAL_L1.onTrue(new InstantCommand(()-> {g.CORALLIFT.state = CoralLiftState.L1;}, g.ROBOT.coralLift));
     g.OI.OPERATOR_CORAL_L2.onTrue(new InstantCommand(()-> {g.CORALLIFT.state = CoralLiftState.L2;}, g.ROBOT.coralLift));
     g.OI.OPERATOR_CORAL_L3.onTrue(new InstantCommand(()-> {g.CORALLIFT.state = CoralLiftState.L3;}, g.ROBOT.coralLift));
     g.OI.OPERATOR_ALGAE_HIGH.onTrue(new InstantCommand(() ->{ g.CORALLIFT.state = CoralLiftState.ALGAE_HIGH; }, g.ROBOT.coralLift ));

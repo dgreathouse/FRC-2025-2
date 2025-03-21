@@ -65,7 +65,9 @@ public class DrivetrainDefaultCommand extends Command {
           break;
         case ANGLE_FIELD_CENTRIC:
           g.ROBOT.drive.setTargetRobotAngle(rightXFiltered_Driver*redInvert, rightYFiltered_Driver*redInvert);
-          g.ROBOT.drive.setTargetRobotAngle(rightXRaw_Operator*redInvert,rightYRaw_Operator*redInvert);
+          g.ROBOT.drive.setAITargetRobotAngle(rightXRaw_Operator*redInvert,rightYRaw_Operator*redInvert);
+          g.ROBOT.drive.setDefenseTargetRobotAngle(rightXRaw_Operator*redInvert,rightYRaw_Operator*redInvert);
+          
           g.ROBOT.drive.driveAngleFieldCentric( leftXFiltered_Driver*redInvert, leftYFiltered_Driver*redInvert, g.ROBOT.angleActual_deg, g.ROBOT.angleRobotTarget_deg, g.DRIVETRAIN.ZERO_CENTER_OF_ROTATION_m);
           break;
         case POLAR_CENTRIC:
