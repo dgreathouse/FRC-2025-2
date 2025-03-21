@@ -13,5 +13,6 @@ public enum CoralLiftState {
     L3,
     L2,
     L1,
+    ZERO,
     START,
 }

@@ -105,7 +105,7 @@ public class AutoDriveToPose extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(m_drivePID.atSetpoint() && m_turnPID.atSetpoint() || m_timer.hasElapsed(m_timeOut_sec) || g.CORALLIFT.state == CoralLiftState.START || g.OI.DRIVER_CORAL_OUT.getAsBoolean()){
+    if(m_drivePID.atSetpoint() && m_turnPID.atSetpoint() || m_timer.hasElapsed(m_timeOut_sec) ||  g.OI.DRIVER_CORAL_OUT.getAsBoolean()){
       g.VISION.aprilTagAlignState = AprilTagAlignState.NONE;
       return true;
     }

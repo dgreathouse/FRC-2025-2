@@ -306,7 +306,7 @@ public class g {
     public static double initTargetIDAngle = 0.0;
   }
   public static class CORALLIFT{
-    public static CoralLiftState state = CoralLiftState.START;
+    public static CoralLiftState state = CoralLiftState.ZERO;
   }
   public static class FIELD{
     public static double TAG_TO_POST_m = 0.16429;

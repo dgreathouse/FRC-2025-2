@@ -40,20 +40,21 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
   VoltageOut m_rightVoltageOut = new VoltageOut(0.0).withEnableFOC(true);
   VoltageOut m_liftVoltageOut = new VoltageOut(0).withEnableFOC(true);
 
-  double m_maxLiftUpVolts = 12;
-  double m_maxLiftDownVolts = -10;
+  double m_maxLiftUpVolts = 9;
+  double m_maxLiftDownVolts = -8;
+  double m_rotateStartAngle_deg = -67.5;
 
   public CoralLift() {
-    m_rotatePID = new PIDController(4, .05, 0);
-    m_rotatePID.setIZone(Math.toRadians(7.5));
-    m_rotatePID.setIntegratorRange(-.1, .1);
-    m_rotatePID.setTolerance(Math.toRadians(1));
+    m_rotatePID = new PIDController(3.5, 0, 0);
+    // m_rotatePID.setIZone(Math.toRadians(7.5));
+    // m_rotatePID.setIntegratorRange(-.1, .1);
+    // m_rotatePID.setTolerance(Math.toRadians(1));
 
-    m_liftPID = new PIDController(0.5, 0, 0);
+    m_liftPID = new PIDController(0.15, 0, 0);
     m_liftPID.setIZone(20); // Sets the IZone range.
     m_liftPID.setIntegratorRange(-.1, .1); // Sets the Integrator range.
     m_liftPID.setTolerance(0.1); // Sets the tolerance
-
+    SmartDashboard.putData("RotatePID", m_rotatePID);
     configureMotors();
     Robot.addDashboardUpdater(this);
   }
@@ -103,7 +104,10 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
         rotateToAngle(55);
         break;
       case START:
-        rotateToAngle(-67.5);
+        rotateToAngle(m_rotateStartAngle_deg);
+        break;
+        case ZERO:
+        rotateToAngle(0);
         break;
       case LIFT_CLIMB_UP:
         rotateToAngle(55);
@@ -173,7 +177,9 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
   }
   public void rotateToAngle(double _angle_deg) {
     double pid = m_rotatePID.calculate(Math.toRadians(getRotateAngle_deg()), Math.toRadians(_angle_deg));
+    SmartDashboard.putNumber("Rotate Expected Angle", _angle_deg);
     pid = MathUtil.clamp(pid, -8, 8);
+    SmartDashboard.putNumber("RotatePID_volts", pid);
     m_rotateMotor.setVoltage(pid);
   }
 
