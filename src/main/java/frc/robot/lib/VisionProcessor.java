@@ -39,6 +39,7 @@ public class VisionProcessor implements IUpdateDashboard{
     boolean m_resetYawInitFlag = false;
     AprilTagFieldLayout m_apriltagFieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2025ReefscapeWelded);
     public List<ApriltagPose> apriltagPose = new ArrayList<ApriltagPose>();
+    double m_targetDistance_m = 0.0;
     public VisionProcessor(){
 
         m_leftCamera = new PhotonCamera("LeftArducam");
@@ -170,13 +171,15 @@ public class VisionProcessor implements IUpdateDashboard{
         double ambiguity = -1.0;
         TagFoundState tagState = TagFoundState.EMPTY;
         int tagID = -1;
+        double targetDistance_m = -1.0;
         List<PhotonPipelineResult> results = _camera.getAllUnreadResults(); // Get all results from the apriltag pipeline.
         if (!results.isEmpty()) { // If there are no results from the pipeline the results is empty. This happens 2 times. 1. No tag found, 2. Pipeline flushed to often with no new results
             for (PhotonPipelineResult photonPipelineResult : results) {  // Loop through all the results
                 if(photonPipelineResult.hasTargets()){ // If the result has targets
                     List<PhotonTrackedTarget> targets = photonPipelineResult.getTargets(); //
                     if(!targets.isEmpty()){ // If the targets are not empty
-                        for (PhotonTrackedTarget target : targets) { // Loop through all the targets
+                        PhotonTrackedTarget target = targets.get(0); // Get the first target
+                        //for (PhotonTrackedTarget target : targets) { // Loop through all the targets
                             ambiguity = target.poseAmbiguity; // Get the ambiguity of the target
                             tagID = target.getFiducialId(); // Get the ID of the target
                             
@@ -187,15 +190,18 @@ public class VisionProcessor implements IUpdateDashboard{
                                 Optional<EstimatedRobotPose> estimatedRobotPose = _poseEstimtor.update(photonPipelineResult); // Update the pose estimator with the result
                                 if(estimatedRobotPose.isPresent()){ 
                                     Pose2d pose = estimatedRobotPose.get().estimatedPose.toPose2d(); // Get the pose of the robot
+                                    targetDistance_m = pose.getTranslation().getDistance(target.bestCameraToTarget.getTranslation().toTranslation2d());
+                                    
                                     g.ROBOT.drive.addVisionMeasurement(pose, estimatedRobotPose.get().timestampSeconds); // Add the pose to the drive
                                     g.VISION.pose2d = Optional.of(pose); // Set the global vision pose to the pose
+                                    
                                 }
                                 if(target.getFiducialId() == g.VISION.aprilTagRequestedID){ // If the target ID is the sam as the requested ID
                                     g.VISION.aprilTagRequestedPose = g.ROBOT.vision.getRobotPoseForAprilTag(g.VISION.aprilTagRequestedID, g.VISION.aprilTagAlignState);
                                     tagState = TagFoundState.TARGET_ID_FOUND; // Set the tagState to TARGET_ID_FOUND
                                 }
                             }
-                        }
+                       setTargetDistance(targetDistance_m);
                     }
                 }
             }
@@ -204,7 +210,14 @@ public class VisionProcessor implements IUpdateDashboard{
         return new PoseEstimateStatus(g.VISION.tagState, ambiguity, tagID); // Return the tagState, ambiguity and tagID
     }
  
-    
+    public void setTargetDistance(double _distance){
+        m_targetDistance_m = _distance;
+    }
+
+    public double getTargetDistance(){
+        return m_targetDistance_m;
+    }
+
     public void calculatePose(){
         PoseEstimateStatus leftCamState = null;
         PoseEstimateStatus rightCamState = null;
@@ -230,6 +243,7 @@ public class VisionProcessor implements IUpdateDashboard{
             }
         }
     }
+
     /**
      * Reset the yaw of the robot if the robot is at an angle, or POSE is not zero, and the vision pose is within the ambiguity setpoint.
      * @param _leftAmbiguity
@@ -377,6 +391,7 @@ public class VisionProcessor implements IUpdateDashboard{
         SmartDashboard.putData("Vision/Vision Field2d", g.VISION.field2d);
         SmartDashboard.putNumber("Vision/LeftAmbiguity", g.VISION.leftTargetAmbiguity);
         SmartDashboard.putNumber("Vision/RightAmbiguity", g.VISION.rightTargetAmbiguity);
+        SmartDashboard.putNumber("Vision/Target Distance", m_targetDistance_m);
         //SmartDashboard.putNumber("Vision/InitTargetAngle",  g.VISION.initTargetIDAngle);
         //SmartDashboard.putNumber("Vision/Pose Vision X", g.VISION.pose2d.getX());
         //SmartDashboard.putNumber("Vision/Pose Vision Y", g.VISION.pose2d.getY());

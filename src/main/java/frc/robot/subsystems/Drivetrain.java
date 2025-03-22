@@ -117,7 +117,7 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
         g.DRIVETRAIN.STD_DEV_LOW);
 
     SmartDashboard.putBoolean("Robot/IsGyroPrimaryActive", true);
-    SmartDashboard.putBoolean("Robot/IsVisionEnabled", m_isVisionEnabled);
+    
     SmartDashboard.putNumber("Drive/SpeedScale", m_speedScale);
     SmartDashboard.putData("Drive/AngleFCTurnPid",m_turnPID);
     Robot.addDashboardUpdater(this);
@@ -637,7 +637,7 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
     // }
 
     SmartDashboard.putData("Robot/Drive Field2d", g.ROBOT.field2d);
-
+    SmartDashboard.putBoolean("Robot/IsVisionEnabled", m_isVisionEnabled);
     SmartDashboard.putNumber("Robot/Pose Angle", g.ROBOT.pose2d.getRotation().getDegrees());
     SmartDashboard.putNumber("Robot/angleTarget_deg", g.ROBOT.angleRobotTarget_deg);
     SmartDashboard.putNumber("Robot/angleActual_deg", g.ROBOT.angleActual_deg);
@@ -658,7 +658,6 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
     SmartDashboard.putData("Drive/Subsystem", this);
     // Get from Dashboard
     g.ROBOT.isPrimaryGyroActive = SmartDashboard.getBoolean("Robot/IsGyroPrimaryActive", true);
-    m_isVisionEnabled = SmartDashboard.getBoolean("Robot/IsVisionEnabled", true);
 
 
   }
