@@ -6,6 +6,7 @@ import frc.robot.commands.coralLift.CoralLiftSetStateAndSpin;
 import frc.robot.commands.coralLift.CoralMoveToStateCommand;
 import frc.robot.commands.coralLift.CoralSetStateCommand;
 import frc.robot.commands.coralLift.CoralSpinInCommand;
+import frc.robot.commands.coralLift.CoralSpinOffCommand;
 import frc.robot.commands.coralLift.CoralSpinOutCommand;
 import frc.robot.commands.coralLift.SetCoralAIState;
 import frc.robot.commands.drive.AutoDriveDelay;
@@ -33,21 +34,22 @@ public class AutoRL_Station extends SequentialCommandGroup {
         new ParallelCommandGroup(
             new CoralMoveToStateCommand(_coralLiftState, 2),
             new AutoDriveToPose(g.ROBOT.vision.getRobotPoseForAprilTag(tagID, aprilTagAlignState), 0.5, 2)),
-        new CoralSpinOutCommand(coralLiftState, 1),
+        new CoralSpinOutCommand(coralLiftState, .5),
         new AutoRotateToPose(g.ROBOT.vision.getRobotPoseForAprilTag(AutoIDUtility.getStationTagID(_tagID), AprilTagAlignState.LEFT), .3,1),
         new ParallelCommandGroup(
-            new CoralMoveToStateCommand(CoralLiftState.START, 2),
-            new AutoDriveToPose(g.ROBOT.vision.getRobotPoseForAprilTag(AutoIDUtility.getStationTagID(_tagID), AprilTagAlignState.LEFT),0.5, 3)
+            new CoralMoveToStateCommand(CoralLiftState.START, 2.25),
+            new AutoDriveToPose(g.ROBOT.vision.getRobotPoseForAprilTag(AutoIDUtility.getStationTagID(_tagID), AprilTagAlignState.LEFT),0.6, 2.25)
         ),
         new CoralSpinInCommand(coralLiftState, 3),
-        new AutoRotateToPose(g.ROBOT.vision.getRobotPoseForAprilTag(AutoIDUtility.getNextReefTagID(_tagID), AprilTagAlignState.RIGHT),.3, 1),
+        new AutoRotateToPose(g.ROBOT.vision.getRobotPoseForAprilTag(AutoIDUtility.getNextReefTagID(_tagID), AprilTagAlignState.LEFT),.3, 1),
+        new CoralSpinOffCommand(),
         new ParallelCommandGroup(
-             new AutoDriveToPose(g.ROBOT.vision.getRobotPoseForAprilTag(AutoIDUtility.getNextReefTagID(_tagID), AprilTagAlignState.RIGHT), .5, 3),
-             new CoralMoveToStateCommand(CoralLiftState.L3, 1)
+             new AutoDriveToPose(g.ROBOT.vision.getRobotPoseForAprilTag(AutoIDUtility.getNextReefTagID(_tagID), AprilTagAlignState.LEFT), .6, 2.25),
+             new CoralMoveToStateCommand(CoralLiftState.L3, 2.25)
         ),
-        new CoralSpinOutCommand(coralLiftState, 1)
-        // new CoralLiftSetStateAndSpin(CoralLiftState.ALGAE_LOW, 1),
-        // new CoralMoveToStateCommand(CoralLiftState.START, 2)
+        new CoralSpinOutCommand(CoralLiftState.L3, 0.5),
+        new CoralLiftSetStateAndSpin(CoralLiftState.ALGAE_LOW, 1.5)
+        //new CoralMoveToStateCommand(CoralLiftState.START, 2)
 
 
     );

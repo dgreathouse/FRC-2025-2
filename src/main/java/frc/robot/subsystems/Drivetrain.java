@@ -245,8 +245,8 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
     _centerOfRotation_m = _centerOfRotation_m == null ? g.DRIVETRAIN.ZERO_CENTER_OF_ROTATION_m : _centerOfRotation_m;
 
     SwerveModuleState[] states = m_kinematics.toSwerveModuleStates(_speeds, _centerOfRotation_m);
-    //SwerveDriveKinematics.desaturateWheelSpeeds(states, g.SWERVE.DRIVE.MAX_VELOCITY_mPsec);
-   
+    SwerveDriveKinematics.desaturateWheelSpeeds(states, g.SWERVE.DRIVE.MAX_VELOCITY_mPsec);
+    //SwerveDriveKinematics.desaturateWheelSpeeds(states, MetersPerSecond.of(g.SWERVE.DRIVE.MAX_VELOCITY_mPsec));
     g.DRIVETRAIN.driveSpeedRequested_mps = 0.0;
     for (int i = 0; i < g.SWERVE.COUNT; i++) {
       g.SWERVE.modules[i].setDesiredState(states[i]);

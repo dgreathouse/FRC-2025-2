@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import org.ejml.sparse.csc.mult.MatrixVectorMultWithSemiRing_FSCC;
+
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.TalonFXSConfiguration;
 import com.ctre.phoenix6.controls.VoltageOut;
@@ -167,7 +169,7 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
   }
   public void moveWithVoltage(double _volts, CoralLiftState _state) {
     g.CORALLIFT.state = _state;
-    if(_volts > 0 && getPosition_mm() > 406) {
+    if(_volts > 0 && getPosition_mm() < 416) {
       m_liftMotor.setControl(m_liftVoltageOut.withOutput(_volts));
     }else{
       m_liftMotor.setControl(m_liftVoltageOut.withOutput(0));
@@ -187,7 +189,7 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
     return m_rotateMotor.getEncoder().getPosition() * 360 / g.CORAL.ROTATE_GEAR_RATIO;
   }
   public boolean isCoralLiftAtSetPoint() {
-    if(m_rotatePID.atSetpoint() && m_liftPID.atSetpoint()) {
+    if(m_liftPID.atSetpoint()) {
       return true;
     }
     return false;
