@@ -21,7 +21,9 @@ public class DrivetrainDefaultCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
-
+  private double squareInput(double input) {
+    return Math.copySign(input * input, input);
+  }
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
@@ -32,6 +34,12 @@ public class DrivetrainDefaultCommand extends Command {
     double leftXRaw_Driver = -g.OI.driverController.getLeftY(); // 1
     double rightYRaw_Driver = -g.OI.driverController.getRightX(); // 2
     double rightXRaw_Driver = -g.OI.driverController.getRightY(); // 5
+
+    leftYRaw_Driver = squareInput(leftYRaw_Driver);
+    leftXRaw_Driver = squareInput(leftXRaw_Driver); 
+    rightYRaw_Driver = squareInput(rightYRaw_Driver);
+    rightXRaw_Driver = squareInput(rightXRaw_Driver);
+    
     
     double rightYRaw_Operator = -g.OI.operatorController.getRightX(); // 2
     double rightXRaw_Operator = -g.OI.operatorController.getRightY(); // 5
@@ -60,7 +68,7 @@ public class DrivetrainDefaultCommand extends Command {
     }else {
       switch (g.DRIVETRAIN.driveMode) {
         case FIELD_CENTRIC:
-          g.ROBOT.drive.driveFieldCentric(leftXFiltered_Driver*redInvert, leftYFiltered_Driver*redInvert, rightYFiltered_Driver, g.ROBOT.angleActual_deg, g.DRIVETRAIN.centerOfRotation_m);
+          g.ROBOT.drive.driveFieldCentric(leftXFiltered_Driver*redInvert, leftYFiltered_Driver*redInvert, rightYFiltered_Driver, g.ROBOT.angleActual_deg, g.DRIVETRAIN.ZERO_CENTER_OF_ROTATION_m);
           break;
         case ANGLE_FIELD_CENTRIC:
           g.ROBOT.drive.setTargetRobotAngle(rightXFiltered_Driver*redInvert, rightYFiltered_Driver*redInvert);

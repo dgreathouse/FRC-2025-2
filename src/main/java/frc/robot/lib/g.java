@@ -255,6 +255,7 @@ public class g {
     public static final double AUTO_DRIVE_POSE_ANGLE_TOLERANCE_deg = 1.0; 
     public static volatile DriveMode driveMode = DriveMode.FIELD_CENTRIC;
     public static final Translation2d ZERO_CENTER_OF_ROTATION_m = new Translation2d();
+    
     public static volatile Translation2d centerOfRotation_m = new Translation2d();
     public static volatile double driveSpeedActual_mps = 0.0;
     public static volatile double driveSpeedRequested_mps = 0.0;
