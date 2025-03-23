@@ -127,6 +127,7 @@ public class g {
     public static final Trigger OPERATOR_CORAL_START = operatorController.touchpad();
     public static final Trigger OPERATOR_LIFT_CLIMB_UP = operatorController.R1();
     public static final Trigger OPERATOR_LIFT_CLIMB_DOWN = operatorController.L1();
+    public static final Trigger OPERATOR_AUTO_DRIVE_TOGGLE = operatorController.povRight();
 
 
     // Button Board

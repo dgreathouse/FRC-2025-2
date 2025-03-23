@@ -128,7 +128,7 @@ public class VisionProcessor implements IUpdateDashboard{
         x = m_apriltagFieldLayout.getTagPose(12).get().getX();
         y = m_apriltagFieldLayout.getTagPose(12).get().getY();
         // g.AprilTagLocations.pose.add(new ApriltagPose(0.6315, 1.3429, 1.5871,0.6445,1.1247,0.9846, 54.0));  // ID 12
-        apriltagPose.add(new ApriltagPose(0.6315, 1.3429, 1.4871,0.5445,1.1247,0.9846, 54.0));  // ID 12
+        apriltagPose.add(new ApriltagPose(0.6315, 1.3429, 1.25,0.55,1.1247,0.9846, 54.0));  // ID 12
         x = m_apriltagFieldLayout.getTagPose(13).get().getX();
         y = m_apriltagFieldLayout.getTagPose(13).get().getY();
         apriltagPose.add(new ApriltagPose(1.6789, 7.4039, 0.6315, 6.6872, 1.1247, 7.0456, -54.0));  // ID 13

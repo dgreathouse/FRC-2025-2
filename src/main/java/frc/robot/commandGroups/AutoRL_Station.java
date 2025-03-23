@@ -1,6 +1,7 @@
 package frc.robot.commandGroups;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.coralLift.CoralLiftSetStateAndSpin;
 import frc.robot.commands.coralLift.CoralMoveToStateCommand;
@@ -35,15 +36,15 @@ public class AutoRL_Station extends SequentialCommandGroup {
             new CoralMoveToStateCommand(_coralLiftState, 2),
             new AutoDriveToPose(g.ROBOT.vision.getRobotPoseForAprilTag(tagID, aprilTagAlignState), 0.5, 2)),
         new CoralSpinOutCommand(coralLiftState, .5),
-        new AutoRotateToPose(g.ROBOT.vision.getRobotPoseForAprilTag(AutoIDUtility.getStationTagID(_tagID), AprilTagAlignState.LEFT), .3,1),
+        new AutoRotateToPose(g.ROBOT.vision.getRobotPoseForAprilTag(AutoIDUtility.getStationTagID(_tagID), AprilTagAlignState.RIGHT), .3,1),
         new ParallelCommandGroup(
-            new CoralMoveToStateCommand(CoralLiftState.START, 2.25),
-            new AutoDriveToPose(g.ROBOT.vision.getRobotPoseForAprilTag(AutoIDUtility.getStationTagID(_tagID), AprilTagAlignState.LEFT),0.6, 2.25)
+            new CoralMoveToStateCommand(CoralLiftState.START, 1.75),
+            new AutoDriveToPose(g.ROBOT.vision.getRobotPoseForAprilTag(AutoIDUtility.getStationTagID(_tagID), AprilTagAlignState.RIGHT),0.6, 1.75)
         ),
         new CoralSpinInCommand(coralLiftState, 3),
         new AutoRotateToPose(g.ROBOT.vision.getRobotPoseForAprilTag(AutoIDUtility.getNextReefTagID(_tagID), AprilTagAlignState.LEFT),.3, 1),
         new CoralSpinOffCommand(),
-        new ParallelCommandGroup(
+        new ParallelDeadlineGroup (
              new AutoDriveToPose(g.ROBOT.vision.getRobotPoseForAprilTag(AutoIDUtility.getNextReefTagID(_tagID), AprilTagAlignState.LEFT), .6, 2.25),
              new CoralMoveToStateCommand(CoralLiftState.L3, 2.25)
         ),
