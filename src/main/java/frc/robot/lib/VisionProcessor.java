@@ -41,7 +41,7 @@ public class VisionProcessor implements IUpdateDashboard{
     public List<ApriltagPose> apriltagPose = new ArrayList<ApriltagPose>();
     double m_targetDistance_m = 0.0;
     public VisionProcessor(){
-
+        
         m_leftCamera = new PhotonCamera("LeftArducam");
         m_leftCamera.setPipelineIndex(0);
         m_leftCamera.setDriverMode(false);
@@ -190,27 +190,30 @@ public class VisionProcessor implements IUpdateDashboard{
                                 Optional<EstimatedRobotPose> estimatedRobotPose = _poseEstimtor.update(photonPipelineResult); // Update the pose estimator with the result
                                 if(estimatedRobotPose.isPresent()){ 
                                     Pose2d pose = estimatedRobotPose.get().estimatedPose.toPose2d(); // Get the pose of the robot
-                                    targetDistance_m = pose.getTranslation().getDistance(target.bestCameraToTarget.getTranslation().toTranslation2d());
+                                   // targetDistance_m = pose.getTranslation().getDistance(target.bestCameraToTarget.getTranslation().toTranslation2d());
+                                    targetDistance_m = m_apriltagFieldLayout.getTagPose(tagID).get().getTranslation().toTranslation2d().getDistance(pose.getTranslation());
                                     
                                     g.ROBOT.drive.addVisionMeasurement(pose, estimatedRobotPose.get().timestampSeconds); // Add the pose to the drive
                                     g.VISION.pose2d = Optional.of(pose); // Set the global vision pose to the pose
-                                    
+                                    setTargetDistance(targetDistance_m);
                                 }
-                                if(target.getFiducialId() == g.VISION.aprilTagRequestedID){ // If the target ID is the sam as the requested ID
+                                if(target.getFiducialId() == g.VISION.aprilTagRequestedID){ // If the target ID is the same as the requested ID
                                     g.VISION.aprilTagRequestedPose = g.ROBOT.vision.getRobotPoseForAprilTag(g.VISION.aprilTagRequestedID, g.VISION.aprilTagAlignState);
                                     tagState = TagFoundState.TARGET_ID_FOUND; // Set the tagState to TARGET_ID_FOUND
                                 }
+                                
                             }
-                       setTargetDistance(targetDistance_m);
+                       
                     }
                 }
             }
         }
         g.VISION.tagState = tagState; // Set the global tagState to the tagState
-        return new PoseEstimateStatus(g.VISION.tagState, ambiguity, tagID); // Return the tagState, ambiguity and tagID
+        return new PoseEstimateStatus(g.VISION.tagState, ambiguity, tagID ); // Return the tagState, ambiguity and tagID
     }
  
     public void setTargetDistance(double _distance){
+        if(_distance > 0)
         m_targetDistance_m = _distance;
     }
 
@@ -240,6 +243,9 @@ public class VisionProcessor implements IUpdateDashboard{
                 } else if (leftCamState.getState() == TagFoundState.EMPTY && rightCamState.getState() == TagFoundState.EMPTY) {
                     g.VISION.isTargetAprilTagFound = false;
                 }
+                // if(leftCamState.getAmbiguity() >= 0 && leftCamState.getAmbiguity() < rightCamState.getAmbiguity()){ {
+                //     g.VISION.isTargetAprilTagFound = true;
+                // }
             }
         }
     }

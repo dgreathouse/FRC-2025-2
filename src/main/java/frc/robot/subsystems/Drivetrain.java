@@ -52,7 +52,7 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
     m_yawStatusPigeon2.setUpdateFrequency(g.SWERVE.CAN_UPDATE_FREQ_hz);
     m_angularVelocityZStatusPigeon2 = g.ROBOT.gyro_pigeon2.getAngularVelocityZDevice();
     m_angularVelocityZStatusPigeon2.setUpdateFrequency(g.SWERVE.CAN_UPDATE_FREQ_hz);
-
+    g.ROBOT.gyro_navx.reset();
     g.SWERVE.modules[0] = new SwerveModule(
         "BR",
         12,
@@ -166,11 +166,8 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
     m_speeds.vxMetersPerSecond = _xSpeed * g.SWERVE.DRIVE.MAX_VELOCITY_mPsec * m_speedScale;
     m_speeds.vyMetersPerSecond = _ySpeed * g.SWERVE.DRIVE.MAX_VELOCITY_mPsec * m_speedScale;
     m_speeds.omegaRadiansPerSecond = _rotate * g.SWERVE.DRIVE.MAX_ANGULAR_VELOCITY_radPsec * m_speedScale;
-    SmartDashboard.putNumber("Drive/m_speeds.vxMetersPerSecond", m_speeds.vxMetersPerSecond);
-    SmartDashboard.putNumber("Drive/m_speeds.vyMetersPerSecond", m_speeds.vyMetersPerSecond);
-    SmartDashboard.putNumber("Drive/m_speeds.omegaRadiansPerSecond", m_speeds.omegaRadiansPerSecond);
     m_speeds = ChassisSpeeds.fromRobotRelativeSpeeds(m_speeds, new Rotation2d(Math.toRadians(-_robotAngle_deg)));
-    setSwerveModuleStates(m_speeds, _centerOfRotation_m);
+     setSwerveModuleStates(m_speeds, _centerOfRotation_m);
   }
 
   /**
@@ -248,7 +245,8 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
     _centerOfRotation_m = _centerOfRotation_m == null ? g.DRIVETRAIN.ZERO_CENTER_OF_ROTATION_m : _centerOfRotation_m;
 
     SwerveModuleState[] states = m_kinematics.toSwerveModuleStates(_speeds, _centerOfRotation_m);
-    SwerveDriveKinematics.desaturateWheelSpeeds(states, MetersPerSecond.of(g.SWERVE.DRIVE.MAX_VELOCITY_mPsec));
+
+    //SwerveDriveKinematics.desaturateWheelSpeeds(states, MetersPerSecond.of(g.SWERVE.DRIVE.MAX_VELOCITY_mPsec));
     g.DRIVETRAIN.driveSpeedRequested_mps = 0.0;
     for (int i = 0; i < g.SWERVE.COUNT; i++) {
       g.SWERVE.modules[i].setDesiredState(states[i]);
@@ -467,7 +465,7 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
     // }
     // }
     g.ROBOT.gyro_pigeon2.setYaw(_angle);
-    g.ROBOT.gyro_navx.reset();
+    
     g.ROBOT.gyro_navx.setAngleAdjustment(-_angle);
   }
 
@@ -612,7 +610,10 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
         // m_poseEstimator.setVisionMeasurementStdDevs(g.DRIVETRAIN.STD_DEV_HIGH); //
         // Set the standard deviation to high for Vision
         // if(g.ROBOT.vision.isYawResetComplete())
-        m_poseEstimator.addVisionMeasurement(_estPose, _timeStamp); // Add the vision measurement to the PoseEstimator
+        if(g.ROBOT.vision.getTargetDistance() > g.VISION.TARGET_DISTANCE_MIN_m && g.ROBOT.vision.getTargetDistance() < g.VISION.TARGET_DISTANCE_MAX_m){ // If the vision target is far enough away
+          m_poseEstimator.addVisionMeasurement(_estPose, _timeStamp); // Add the vision measurement to the PoseEstimator
+        }
+       // m_poseEstimator.addVisionMeasurement(_estPose, _timeStamp); // Add the vision measurement to the PoseEstimator
       }
     } else {
       // m_poseEstimator.setVisionMeasurementStdDevs(g.DRIVETRAIN.STD_DEV_LOW); // Set

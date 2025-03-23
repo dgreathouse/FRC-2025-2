@@ -55,7 +55,7 @@ public class g {
     public static final Pose2d POSE_START_RIGHT = new Pose2d(7.1374, 1.2192, new Rotation2d());
     public static final Pose2d POSE_START_CENTER = new Pose2d(7.1374, 4.064, new Rotation2d());
     public static final double TELEMETRY_RATE_sec = 0.02;
-    public static final long ODOMETRY_RATE_ms = 10;
+    public static final long ODOMETRY_RATE_ms = 5;
     public static volatile double centerDistanceToFrontBumper_m = 0.565;// 0.535;
     public static volatile double centerDistanceToBackBumper_m = 0.42211;
     public static volatile double centerDistanceToStationSide_m = 0.609;
@@ -299,6 +299,8 @@ public class g {
     public static volatile Pose2d aprilTagRequestedPose = new Pose2d();
     public static volatile boolean isGlobalPoseResetActive = true; // Not implemented
     public static final double AMBIGUITY_SETPOINT = 0.075;
+    public static final double TARGET_DISTANCE_MAX_m = 2.5;
+    public static final double TARGET_DISTANCE_MIN_m = 1;
     public static volatile double leftTargetAmbiguity = -1.0;
     public static volatile double rightTargetAmbiguity = -1.0;
     public static volatile Field2d field2d = new Field2d();
