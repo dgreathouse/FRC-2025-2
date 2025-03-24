@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.lib.AprilTagAlignState;
-import frc.robot.lib.CoralLiftState;
 import frc.robot.lib.DriveMode;
 import frc.robot.lib.g;
 
@@ -107,6 +106,7 @@ public class AutoDriveToPose extends Command {
   public boolean isFinished() {
     if(m_drivePID.atSetpoint() && m_turnPID.atSetpoint() || m_timer.hasElapsed(m_timeOut_sec) ||  g.OI.DRIVER_CORAL_OUT.getAsBoolean()){
       g.VISION.aprilTagAlignState = AprilTagAlignState.NONE;
+      g.DRIVETRAIN.driveMode = DriveMode.ANGLE_FIELD_CENTRIC;
       return true;
     }
     return false;

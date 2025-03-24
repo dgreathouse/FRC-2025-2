@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import static edu.wpi.first.units.Units.MetersPerSecond;
 import com.ctre.phoenix6.StatusSignal;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
@@ -19,6 +18,7 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
+import frc.robot.commands.drive.AutoDriveToPose;
 import frc.robot.lib.AI;
 import frc.robot.lib.AprilTagAlignState;
 
@@ -44,7 +44,7 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
   private PIDController m_turnPID = new PIDController(0.45, 0.4, 0);
 
   private ChassisSpeeds m_speeds = new ChassisSpeeds();
-
+  private AutoDriveToPose m_autoDriveToPose;
   /** Creates a new Drivetrain. */
   @SuppressWarnings("unused")
   public Drivetrain() {
@@ -123,7 +123,17 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
     Robot.addDashboardUpdater(this);
 
   }
-
+  public void setAutoDriveToPose(AutoDriveToPose _autoDriveToPose){
+    m_autoDriveToPose = _autoDriveToPose;
+  }
+  public AutoDriveToPose getAutoDriveToPose(){
+    return m_autoDriveToPose;
+  }
+  public void cancelAutoDriveToPose(){
+    if(m_autoDriveToPose != null){
+      m_autoDriveToPose.cancel();
+    }
+  } 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -256,7 +266,9 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
     g.DRIVETRAIN.driveSpeedActual_mps = getDriveSpeed();
     g.DRIVETRAIN.driveSpeedError_mps = Math.abs(g.DRIVETRAIN.driveSpeedActual_mps - g.DRIVETRAIN.driveSpeedActual_mps);
   }
-
+  public void toggleIsAutoDriveEnabled(){
+    g.DRIVETRAIN.isAutoDriveEnabled = !g.DRIVETRAIN.isAutoDriveEnabled;
+  }
   /**
    * Set the drive angle for AngleFieldCentric mode if the
    * Hypotenus of the x,y is greater that a threashold
@@ -301,22 +313,23 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
 
     if (Math.abs(hyp) > g.OI.THUMBSTICK_AXIS_ANGLE_DEADBAND) {
       if (joystickAngle >= -30 && joystickAngle <= 30) { // North
-        setTargetRobotAngle(RobotAlignStates.FRONT);
+        setAITargetRobotAngle(RobotAlignStates.FRONT);
       } else if (joystickAngle >= -90 && joystickAngle < -30) { // North East
-        setTargetRobotAngle(RobotAlignStates.FRONT_LEFT);
+        setAITargetRobotAngle(RobotAlignStates.FRONT_LEFT);
       } else if (joystickAngle >= -150 && joystickAngle < -90) { // South East
-        setTargetRobotAngle(RobotAlignStates.BACK_LEFT);
+        setAITargetRobotAngle(RobotAlignStates.BACK_LEFT);
       } else if ((joystickAngle >= 150 && joystickAngle <= 180.0)
           || (joystickAngle <= -150 && joystickAngle > -180)) { // South
-        setTargetRobotAngle(RobotAlignStates.BACK);
+            setAITargetRobotAngle(RobotAlignStates.BACK);
       } else if (joystickAngle <= 90 && joystickAngle > 30) { // North West
-        setTargetRobotAngle(RobotAlignStates.FRONT_RIGHT);
+        setAITargetRobotAngle(RobotAlignStates.FRONT_RIGHT);
       } else if (joystickAngle <= 150 && joystickAngle > 90) { // South West
-        setTargetRobotAngle(RobotAlignStates.BACK_RIGHT);
+        setAITargetRobotAngle(RobotAlignStates.BACK_RIGHT);
       }
     }
   }
   public void setAITargetRobotAngle(RobotAlignStates _state){
+    g.DRIVETRAIN.driveMode = DriveMode.ANGLE_FIELD_CENTRIC;
     switch (_state) {
       case BACK:
         AI.StateInput.setState(RobotAlignStates.BACK);
@@ -527,9 +540,9 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
   public void setAprilTagAlignment(AprilTagAlignState _alignState) {
     g.VISION.aprilTagAlignState = _alignState;
     setTargetRobotAngle(g.ROBOT.alignmentState);
-    if(g.ROBOT.alignmentState == RobotAlignStates.STATION_LEFT || g.ROBOT.alignmentState == RobotAlignStates.STATION_RIGHT){
-      AI.ReefModel.resetReefState(_alignState);
-    }
+    // if(g.ROBOT.alignmentState == RobotAlignStates.STATION_LEFT || g.ROBOT.alignmentState == RobotAlignStates.STATION_RIGHT){
+    //   AI.ReefModel.resetReefState(_alignState);
+    // }
   }
 
   public double getDriveSpeed() {

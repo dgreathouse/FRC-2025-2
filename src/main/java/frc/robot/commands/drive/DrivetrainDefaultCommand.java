@@ -12,7 +12,7 @@ public class DrivetrainDefaultCommand extends Command {
   SlewRateLimiter m_stickLimiterLY = new SlewRateLimiter(3);
   SlewRateLimiter m_stickLimiterRX = new SlewRateLimiter(3);
   SlewRateLimiter m_stickLimiterRY = new SlewRateLimiter(3);
-
+  
   /** Creates a new DrivetrainDefaultCommand. */
   public DrivetrainDefaultCommand() {
     addRequirements(g.ROBOT.drive);
@@ -43,7 +43,8 @@ public class DrivetrainDefaultCommand extends Command {
     
     double rightYRaw_Operator = -g.OI.operatorController.getRightX(); // 2
     double rightXRaw_Operator = -g.OI.operatorController.getRightY(); // 5
-
+    double leftYRaw_Operator = -g.OI.operatorController.getLeftX(); // 2
+    double leftXRaw_Operator = -g.OI.operatorController.getLeftY(); // 5
     // Limit the inputs for a deadband related to the joystick
     double leftYFiltered_Driver = MathUtil.applyDeadband(leftYRaw_Driver, 0.1, 1.0);
     double leftXFiltered_Driver = MathUtil.applyDeadband(leftXRaw_Driver, 0.1, 1.0);
@@ -60,10 +61,14 @@ public class DrivetrainDefaultCommand extends Command {
     if(DriverStation.getAlliance().isPresent() && DriverStation.getAlliance().get() == Alliance.Red){
       redInvert = -1;
     }
-    if(g.ROBOT.vision.getIsAutoAprilTagActive() && g.ROBOT.vision.getTargetDistance() > 1 && g.ROBOT.vision.getTargetDistance() < 2.5){
+    if(g.ROBOT.vision.getIsAutoAprilTagActive() && 
+        g.ROBOT.vision.getTargetDistance() > g.VISION.TARGET_DISTANCE_MIN_m && 
+        g.ROBOT.vision.getTargetDistance() < g.VISION.TARGET_DISTANCE_MAX_m && 
+        g.DRIVETRAIN.isAutoDriveEnabled){
       
       //g.VISION.aprilTagRequestedPose = g.ROBOT.vision.getRobotPoseForAprilTag(g.VISION.aprilTagRequestedID, g.VISION.aprilTagAlignState);
-      new AutoDriveToPose(g.VISION.aprilTagRequestedPose, 1, 5).schedule();
+      g.ROBOT.drive.setAutoDriveToPose(new AutoDriveToPose(g.VISION.aprilTagRequestedPose, 1, 5));
+      g.ROBOT.drive.getAutoDriveToPose().schedule();
       
     }else {
       switch (g.DRIVETRAIN.driveMode) {
@@ -73,7 +78,7 @@ public class DrivetrainDefaultCommand extends Command {
         case ANGLE_FIELD_CENTRIC:
           g.ROBOT.drive.setTargetRobotAngle(rightXFiltered_Driver*redInvert, rightYFiltered_Driver*redInvert);
           g.ROBOT.drive.setAITargetRobotAngle(rightXRaw_Operator*redInvert,rightYRaw_Operator*redInvert);
-          //g.ROBOT.drive.setDefenseTargetRobotAngle(rightXRaw_Operator*redInvert,rightYRaw_Operator*redInvert);
+          g.ROBOT.drive.setDefenseTargetRobotAngle(leftXRaw_Operator*redInvert,leftYRaw_Operator*redInvert);
           
           g.ROBOT.drive.driveAngleFieldCentric( leftXFiltered_Driver*redInvert, leftYFiltered_Driver*redInvert, g.ROBOT.angleActual_deg, g.ROBOT.angleRobotTarget_deg, g.DRIVETRAIN.ZERO_CENTER_OF_ROTATION_m);
           break;
@@ -93,7 +98,8 @@ public class DrivetrainDefaultCommand extends Command {
     }
     
   }
-  
+
+
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}

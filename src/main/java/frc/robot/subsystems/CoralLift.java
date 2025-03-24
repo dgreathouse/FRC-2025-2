@@ -4,8 +4,6 @@
 
 package frc.robot.subsystems;
 
-import org.ejml.sparse.csc.mult.MatrixVectorMultWithSemiRing_FSCC;
-
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.TalonFXSConfiguration;
 import com.ctre.phoenix6.controls.VoltageOut;

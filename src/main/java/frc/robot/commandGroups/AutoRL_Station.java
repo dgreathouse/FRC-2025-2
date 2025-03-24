@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.coralLift.CoralLiftSetStateAndSpin;
 import frc.robot.commands.coralLift.CoralMoveToStateCommand;
-import frc.robot.commands.coralLift.CoralSetStateCommand;
 import frc.robot.commands.coralLift.CoralSpinInCommand;
 import frc.robot.commands.coralLift.CoralSpinOffCommand;
 import frc.robot.commands.coralLift.CoralSpinOutCommand;

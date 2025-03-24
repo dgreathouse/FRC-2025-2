@@ -117,8 +117,8 @@ public class g {
     // Operator controller
     public static final int OPERATOR_CONTROLLER_PORT = 1;
     public static CommandPS5Controller operatorController = new CommandPS5Controller(OPERATOR_CONTROLLER_PORT);
-   // public static final Trigger OPERATOR_STATION_LEFT_DEFENSE = operatorController.square();
-   // public static final Trigger OPERATOR_STATION_RIGHT_DEFENSE = operatorController.circle();
+   public static final Trigger OPERATOR_RESET_LEFT_AI = operatorController.square();
+   public static final Trigger OPERATOR_RESET_RIGHT_AI = operatorController.circle();
     //public static final Trigger OPERATOR_CORAL_L1 = operatorController.povUp();
     public static final Trigger OPERATOR_CORAL_L2 = operatorController.cross();
     public static final Trigger OPERATOR_CORAL_L3 = operatorController.triangle();
@@ -128,6 +128,7 @@ public class g {
     public static final Trigger OPERATOR_LIFT_CLIMB_UP = operatorController.R1();
     public static final Trigger OPERATOR_LIFT_CLIMB_DOWN = operatorController.L1();
     public static final Trigger OPERATOR_AUTO_DRIVE_TOGGLE = operatorController.povRight();
+    public static final Trigger OPERATOR_CANCEL_AUTODRIVE = operatorController.L3();
 
 
     // Button Board
@@ -265,7 +266,7 @@ public class g {
     public static final Vector<N3> STD_DEV_LOW = VecBuilder.fill(0.25,0.25,0.25);
     public static final double DRIVE_SPEED_LOW_mps = 2;
     public static double turnPIDErrorDerivative = Double.POSITIVE_INFINITY;
-
+    public static boolean isAutoDriveEnabled = true;
   }
   public static class CORAL {
     public static final double ROTATE_GEAR_RATIO = 4*4*3*(84/34); // TODO: find gear ratio

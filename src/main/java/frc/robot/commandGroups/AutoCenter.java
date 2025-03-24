@@ -6,7 +6,6 @@ import frc.robot.commands.coralLift.CoralLiftSetStateAndSpin;
 import frc.robot.commands.coralLift.CoralMoveToStateCommand;
 import frc.robot.commands.coralLift.CoralSetStateCommand;
 import frc.robot.commands.coralLift.CoralSpinOutCommand;
-import frc.robot.commands.coralLift.SetCoralAIState;
 import frc.robot.commands.drive.AutoDriveDelay;
 import frc.robot.commands.drive.AutoDriveToPose;
 import frc.robot.commands.drive.AutoRotateToPose;
