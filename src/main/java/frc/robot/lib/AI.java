@@ -53,7 +53,7 @@ public class AI {
                 } else if (!rsm.Level2R) {
                     coralLiftState = CoralLiftState.L2;
                     aprilTagAlignState = AprilTagAlignState.RIGHT;
-                    rsm.Level3L = true;
+                    rsm.Level2R = true;
                 } else if (!rsm.Level2L) {
                     coralLiftState = CoralLiftState.L2;
                     aprilTagAlignState = AprilTagAlignState.LEFT;
