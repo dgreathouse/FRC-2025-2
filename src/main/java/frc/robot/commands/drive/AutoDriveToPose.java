@@ -57,6 +57,7 @@ public class AutoDriveToPose extends Command {
     g.DRIVETRAIN.driveMode = DriveMode.FIELD_CENTRIC;
     SmartDashboard.putData("Auto/TurnPID", m_turnPID);
     SmartDashboard.putData("Auto/DrivePID", m_drivePID);
+    g.SWERVE.isEnabled = true;
   }
 
 
@@ -110,6 +111,7 @@ public class AutoDriveToPose extends Command {
     if(m_drivePID.atSetpoint() && m_turnPID.atSetpoint() || m_timer.hasElapsed(m_timeOut_sec) ||  g.OI.DRIVER_CORAL_OUT.getAsBoolean()){
       g.VISION.aprilTagAlignState = AprilTagAlignState.NONE;
       g.DRIVETRAIN.driveMode = DriveMode.ANGLE_FIELD_CENTRIC;
+      g.ROBOT.drive.setServeModulesStatesOff();
       return true;
     }
     return false;

@@ -49,6 +49,7 @@ public class AutoRotateToPose extends Command {
     g.ROBOT.angleRobotTarget_deg = m_robotTargetAngle_deg;
     g.DRIVETRAIN.driveMode = DriveMode.FIELD_CENTRIC;
     SmartDashboard.putData("Auto/RotateTurnPID", m_turnPID);
+    g.SWERVE.isEnabled = true;
   }
 
 

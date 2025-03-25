@@ -266,6 +266,17 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
     g.DRIVETRAIN.driveSpeedActual_mps = getDriveSpeed();
     g.DRIVETRAIN.driveSpeedError_mps = Math.abs(g.DRIVETRAIN.driveSpeedActual_mps - g.DRIVETRAIN.driveSpeedActual_mps);
   }
+  public void setServeModulesStatesOff(){
+    ChassisSpeeds speeds = new ChassisSpeeds();
+    speeds.vxMetersPerSecond = 0;
+    speeds.vyMetersPerSecond = 0;
+    speeds.omegaRadiansPerSecond = 0;
+    SwerveModuleState[] states = m_kinematics.toSwerveModuleStates(speeds, g.DRIVETRAIN.ZERO_CENTER_OF_ROTATION_m);
+    for (int i = 0; i < g.SWERVE.COUNT; i++) {
+      g.SWERVE.modules[i].setDesiredState(states[i]);
+     
+    }
+  }
   public void toggleIsAutoDriveEnabled(){
     g.DRIVETRAIN.isAutoDriveEnabled = !g.DRIVETRAIN.isAutoDriveEnabled;
   }

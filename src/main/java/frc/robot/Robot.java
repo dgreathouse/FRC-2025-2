@@ -170,6 +170,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     g.ROBOT.drive.setDefaultCommand(m_drivetrainDefaultCommand);
+    g.SWERVE.isEnabled = true;
   }
 
   @Override
