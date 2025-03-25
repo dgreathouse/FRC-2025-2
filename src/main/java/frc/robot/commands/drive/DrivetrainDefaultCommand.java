@@ -67,7 +67,7 @@ public class DrivetrainDefaultCommand extends Command {
         g.DRIVETRAIN.isAutoDriveEnabled){
       
       //g.VISION.aprilTagRequestedPose = g.ROBOT.vision.getRobotPoseForAprilTag(g.VISION.aprilTagRequestedID, g.VISION.aprilTagAlignState);
-      g.ROBOT.drive.setAutoDriveToPose(new AutoDriveToPose(g.VISION.aprilTagRequestedPose, 1, 5));
+      g.ROBOT.drive.setAutoDriveToPose(new AutoDriveToPose(g.VISION.aprilTagRequestedPose, 1, 2));
       g.ROBOT.drive.getAutoDriveToPose().schedule();
       
     }else {

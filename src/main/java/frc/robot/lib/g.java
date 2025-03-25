@@ -102,7 +102,7 @@ public class g {
     public static final Trigger DRIVER_MODE_FIELDCENTRIC = driverController.povLeft();
     public static final Trigger DRIVER_MODE_ROBOTCENTRIC = driverController.povRight();
     public static final Trigger DRIVER_MODE_ANGLEFIELDCENTRIC = driverController.povDown();
-    //public static final Trigger DRIVER_TOGGLE_AUTO_DRIVE = driverController.povUp();
+    public static final Trigger DRIVER_TOGGLE_AUTO_DRIVE = driverController.povUp();
     public static final Trigger DRIVER_CORAL_IN = driverController.R1();
     public static final Trigger DRIVER_CORAL_OUT = driverController.L1();
     public static final Trigger DRIVER_CORAL_REVERSE = driverController.triangle();
@@ -152,8 +152,8 @@ public class g {
     public static final Trigger BB_LIFT_CLIMB_DOWN = buttonBoard.button(7);
     public static final Trigger BB_CORAL_START = buttonBoard.button(30);
 
-    public static final Trigger BB_LIFT_RAISE = buttonBoard.button(7);
-    public static final Trigger BB_LIFT_LOWER = buttonBoard.button(8);
+    //public static final Trigger BB_LIFT_RAISE = buttonBoard.button(7);
+    //public static final Trigger BB_LIFT_LOWER = buttonBoard.button(8);
 
     public static final Trigger BB_ROBOT_BACK = buttonBoard.button(3);
     public static final Trigger BB_ROBOT_FRONT = buttonBoard.button(2);
