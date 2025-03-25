@@ -119,7 +119,7 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
         break;
     }
   }
-
+  double m_L3Position_mm = 416;
   public void moveLiftToPosition(CoralLiftState _state) {
     switch (_state) {
       case L1:
@@ -129,7 +129,7 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
         moveToPosition(0);
         break;
       case L3:
-        moveToPosition(416);
+        moveToPosition(m_L3Position_mm);
         break;
       case ALGAE_HIGH:
         moveToPosition(406);
@@ -141,7 +141,7 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
         moveToPosition(0);
         break;
       case LIFT_CLIMB_UP:
-        moveToPosition(35);
+     //   moveToPosition(416);
         break;
       case LIFT_CLIMB_DOWN:
         moveToPosition(100);
@@ -167,7 +167,7 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
   }
   public void moveWithVoltage(double _volts, CoralLiftState _state) {
     g.CORALLIFT.state = _state;
-    if(_volts > 0 && getPosition_mm() < 416) {
+    if(_volts > 0 && getPosition_mm() < m_L3Position_mm) {
       m_liftMotor.setControl(m_liftVoltageOut.withOutput(_volts));
     }else{
       m_liftMotor.setControl(m_liftVoltageOut.withOutput(0));

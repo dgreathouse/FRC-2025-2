@@ -304,28 +304,34 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
       }
     }
   }
+  private boolean m_aiReset = false;
   public void setAITargetRobotAngle(double _x, double _y) {
     
     double x = _x;
     double y = _y;
     double hyp = Math.hypot(x, y); // Always positive
     double joystickAngle = Math.toDegrees(Math.atan2(y, x));
+    RobotAlignStates state = RobotAlignStates.FRONT;
 
-    if (Math.abs(hyp) > g.OI.THUMBSTICK_AXIS_ANGLE_DEADBAND) {
+    if (Math.abs(hyp) > g.OI.THUMBSTICK_AXIS_ANGLE_DEADBAND && !m_aiReset) {
       if (joystickAngle >= -30 && joystickAngle <= 30) { // North
-        setAITargetRobotAngle(RobotAlignStates.FRONT);
+        state = RobotAlignStates.FRONT;
       } else if (joystickAngle >= -90 && joystickAngle < -30) { // North East
-        setAITargetRobotAngle(RobotAlignStates.FRONT_LEFT);
+        state = RobotAlignStates.FRONT_LEFT;
       } else if (joystickAngle >= -150 && joystickAngle < -90) { // South East
-        setAITargetRobotAngle(RobotAlignStates.BACK_LEFT);
+        state = RobotAlignStates.BACK_LEFT;
       } else if ((joystickAngle >= 150 && joystickAngle <= 180.0)
           || (joystickAngle <= -150 && joystickAngle > -180)) { // South
-            setAITargetRobotAngle(RobotAlignStates.BACK);
+            state = RobotAlignStates.BACK;
       } else if (joystickAngle <= 90 && joystickAngle > 30) { // North West
-        setAITargetRobotAngle(RobotAlignStates.FRONT_RIGHT);
+        state = RobotAlignStates.FRONT_RIGHT;
       } else if (joystickAngle <= 150 && joystickAngle > 90) { // South West
-        setAITargetRobotAngle(RobotAlignStates.BACK_RIGHT);
+        state = RobotAlignStates.BACK_RIGHT;
       }
+      m_aiReset = true;
+      setAITargetRobotAngle(state);
+    }else {
+      m_aiReset = false;
     }
   }
   public void setAITargetRobotAngle(RobotAlignStates _state){

@@ -99,7 +99,10 @@ public class AutoDriveToPose extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    g.VISION.aprilTagAlignState = AprilTagAlignState.NONE;
+    g.DRIVETRAIN.driveMode = DriveMode.ANGLE_FIELD_CENTRIC;
+  }
 
   // Returns true when the command should end.
   @Override
