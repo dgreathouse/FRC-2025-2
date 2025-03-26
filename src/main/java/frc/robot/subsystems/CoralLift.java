@@ -132,7 +132,7 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
         moveToPosition(m_L3Position_mm);
         break;
       case ALGAE_HIGH:
-        moveToPosition(416);
+        moveToPosition(m_L3Position_mm);
         break;
       case ALGAE_LOW:
         moveToPosition(120);
