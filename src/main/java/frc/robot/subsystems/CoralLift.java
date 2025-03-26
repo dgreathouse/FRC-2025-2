@@ -101,7 +101,7 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
         rotateToAngle(55);
         break;
       case ALGAE_LOW:
-        rotateToAngle(55);
+        rotateToAngle(60);
         break;
       case START:
         rotateToAngle(m_rotateStartAngle_deg);
@@ -132,10 +132,10 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
         moveToPosition(m_L3Position_mm);
         break;
       case ALGAE_HIGH:
-        moveToPosition(406);
+        moveToPosition(416);
         break;
       case ALGAE_LOW:
-        moveToPosition(20);
+        moveToPosition(120);
         break;
       case START:
         moveToPosition(0);

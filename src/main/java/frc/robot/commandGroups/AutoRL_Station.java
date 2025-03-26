@@ -52,7 +52,7 @@ public class AutoRL_Station extends SequentialCommandGroup {
              new CoralMoveToStateCommand(CoralLiftState.L3, 2.25)
         ),
         new CoralSpinOutCommand(CoralLiftState.L3, 0.5),
-        new CoralLiftSetStateAndSpin(CoralLiftState.ALGAE_LOW, 1),
+        new CoralLiftSetStateAndSpin(CoralLiftState.ALGAE_LOW, 2),
         new ParallelDeadlineGroup(
           new AutoDriveToPose(g.ROBOT.vision.getRobotPoseForAprilTag(AutoIDUtility.getStationTagID(_tagID), AprilTagAlignState.CENTER),0.6, 2.2),
           new CoralMoveToStateCommand(CoralLiftState.START, 1.25)
