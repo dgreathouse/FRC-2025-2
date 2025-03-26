@@ -40,9 +40,10 @@ public class AutoRL_Station extends SequentialCommandGroup {
           new CoralMoveToStateCommand(CoralLiftState.START, 1),
            new AutoRotateToPose(g.ROBOT.vision.getRobotPoseForAprilTag(AutoIDUtility.getStationTagID(_tagID), AprilTagAlignState.CENTER), .3,1)
         ),
+        new AutoDriveToPose(g.ROBOT.vision.getRobotPoseForAprilTag(AutoIDUtility.getStationTagID(_tagID), AprilTagAlignState.CENTER),0.6, 2.2),
         new ParallelDeadlineGroup(
-          new AutoDriveToPose(g.ROBOT.vision.getRobotPoseForAprilTag(AutoIDUtility.getStationTagID(_tagID), AprilTagAlignState.CENTER),0.6, 2.2),
-          new CoralSpinInCommand(CoralLiftState.START, 2.1)
+          new AutoDriveDelay(2),
+          new CoralSpinInCommand(CoralLiftState.START, 2.0)
             
         ),
         new AutoRotateToPose(g.ROBOT.vision.getRobotPoseForAprilTag(AutoIDUtility.getNextReefTagID(_tagID), aprilTagAlignState),.3, 1),

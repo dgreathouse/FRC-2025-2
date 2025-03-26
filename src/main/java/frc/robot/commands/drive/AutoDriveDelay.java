@@ -14,12 +14,16 @@ public class AutoDriveDelay extends Command {
     m_timeOut_sec = 0;
     m_Timer = new Timer();
   }
-
+  public AutoDriveDelay(double _timeOut_sec) {
+    addRequirements(g.ROBOT.drive);
+    m_timeOut_sec = _timeOut_sec;
+    m_Timer = new Timer();
+  }
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     m_Timer.restart();
-    m_timeOut_sec = SmartDashboard.getNumber("Auto/AutoDelay_sec", 0);
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
