@@ -62,8 +62,8 @@ public class DrivetrainDefaultCommand extends Command {
       redInvert = -1;
     }
     if(g.ROBOT.vision.getIsAutoAprilTagActive() && 
-        g.ROBOT.vision.getTargetDistance() > g.VISION.TARGET_DISTANCE_MIN_m && 
-        g.ROBOT.vision.getTargetDistance() < g.VISION.TARGET_DISTANCE_MAX_m && 
+        g.ROBOT.vision.getTargetDistance() > g.VISION.TARGET_DISTANCE_AUTO_MIN_m && 
+        g.ROBOT.vision.getTargetDistance() < g.VISION.TARGET_DISTANCE_AUTO_MAX_m && 
         g.DRIVETRAIN.isAutoDriveEnabled){
       
       //g.VISION.aprilTagRequestedPose = g.ROBOT.vision.getRobotPoseForAprilTag(g.VISION.aprilTagRequestedID, g.VISION.aprilTagAlignState);

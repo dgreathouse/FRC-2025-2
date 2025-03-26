@@ -303,8 +303,10 @@ public class g {
     public static volatile Pose2d aprilTagRequestedPose = new Pose2d();
     public static volatile boolean isGlobalPoseResetActive = true; // Not implemented
     public static final double AMBIGUITY_SETPOINT = 0.075;
-    public static final double TARGET_DISTANCE_MAX_m = 2.5;
-    public static final double TARGET_DISTANCE_MIN_m = 1;
+    public static final double TARGET_DISTANCE_AUTO_MAX_m = 2.5;
+    public static final double TARGET_DISTANCE_AUTO_MIN_m = 1;
+    public static final double TARGET_DISTANCE_VISION_MAX_m = 3;
+    public static final double TARGET_DISTANCE_VISION_MIN_m = 0.5;
     public static volatile double leftTargetAmbiguity = -1.0;
     public static volatile double rightTargetAmbiguity = -1.0;
     public static volatile Field2d field2d = new Field2d();

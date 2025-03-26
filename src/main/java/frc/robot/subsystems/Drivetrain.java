@@ -640,7 +640,7 @@ public class Drivetrain extends SubsystemBase implements IUpdateDashboard {
         // m_poseEstimator.setVisionMeasurementStdDevs(g.DRIVETRAIN.STD_DEV_HIGH); //
         // Set the standard deviation to high for Vision
         // if(g.ROBOT.vision.isYawResetComplete())
-        if(g.ROBOT.vision.getTargetDistance() > g.VISION.TARGET_DISTANCE_MIN_m && g.ROBOT.vision.getTargetDistance() < g.VISION.TARGET_DISTANCE_MAX_m){ // If the vision target is far enough away
+        if(g.ROBOT.vision.getTargetDistance() > g.VISION.TARGET_DISTANCE_VISION_MIN_m && g.ROBOT.vision.getTargetDistance() < g.VISION.TARGET_DISTANCE_VISION_MAX_m){ // If the vision target is far enough away
           m_poseEstimator.addVisionMeasurement(_estPose, _timeStamp); // Add the vision measurement to the PoseEstimator
         }
        // m_poseEstimator.addVisionMeasurement(_estPose, _timeStamp); // Add the vision measurement to the PoseEstimator
