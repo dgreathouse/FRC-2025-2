@@ -60,10 +60,10 @@ public class Robot extends TimedRobot {
     m_autoChooser.addOption("Red Center LL3", new AutoCenter(10,AprilTagAlignState.LEFT, CoralLiftState.L3));
     m_autoChooser.addOption("Blue Center RL3", new AutoCenter(21,AprilTagAlignState.RIGHT, CoralLiftState.L3));
     m_autoChooser.addOption("Blue Center LL3", new AutoCenter(21,AprilTagAlignState.LEFT, CoralLiftState.L3));
-    m_autoChooser.addOption("Blue Left L23", new AutoRL_Station(20,AprilTagAlignState.RIGHT, CoralLiftState.L2));
-    m_autoChooser.addOption("Blue Right L23", new AutoRL_Station(22,AprilTagAlignState.LEFT, CoralLiftState.L2));
-    m_autoChooser.addOption("Red Left L23", new AutoRL_Station(11,AprilTagAlignState.RIGHT, CoralLiftState.L2));
-    m_autoChooser.addOption("Red Right L23", new AutoRL_Station(9,AprilTagAlignState.LEFT, CoralLiftState.L2));
+    m_autoChooser.addOption("Blue Left L23", new AutoRL_Station(20,AprilTagAlignState.LEFT, CoralLiftState.L2));
+    m_autoChooser.addOption("Blue Right L23", new AutoRL_Station(22,AprilTagAlignState.RIGHT, CoralLiftState.L2));
+    m_autoChooser.addOption("Red Left L23", new AutoRL_Station(11,AprilTagAlignState.LEFT, CoralLiftState.L2));
+    m_autoChooser.addOption("Red Right L23", new AutoRL_Station(9,AprilTagAlignState.RIGHT, CoralLiftState.L2));
     SmartDashboard.putData("Autonomouse Play", m_autoChooser);
     SmartDashboard.putNumber("Auto/AutoDelay_sec" ,0);
 
@@ -127,8 +127,8 @@ public class Robot extends TimedRobot {
      g.OI.BB_ROBOT_STATION_LEFT.onTrue(new InstantCommand(() ->{ g.ROBOT.drive.setTargetRobotAngle(RobotAlignStates.STATION_LEFT); }, g.ROBOT.drive ));
      g.OI.BB_ROBOT_STATION_RIGHT.onTrue(new InstantCommand(() ->{ g.ROBOT.drive.setTargetRobotAngle(RobotAlignStates.STATION_RIGHT); }, g.ROBOT.drive ));
 
-     g.OI.BB_ROBOT_RIGHT.onTrue(new InstantCommand(() ->{ g.ROBOT.drive.setTargetRobotAngle(RobotAlignStates.RIGHT); }, g.ROBOT.drive ));
-     g.OI.BB_ROBOT_LEFT.onTrue(new InstantCommand(() ->{ g.ROBOT.drive.setTargetRobotAngle(RobotAlignStates.LEFT); }, g.ROBOT.drive ));
+     g.OI.BB_ROBOT_RIGHT.onTrue(new InstantCommand(() ->{ AI.ReefModel.resetReefState(AprilTagAlignState.RIGHT);  }, g.ROBOT.drive ));
+     g.OI.BB_ROBOT_LEFT.onTrue(new InstantCommand(() ->{ AI.ReefModel.resetReefState(AprilTagAlignState.LEFT); }, g.ROBOT.drive ));
 
      g.OI.BB_APRIL_LEFT.onTrue(new InstantCommand(() ->{ g.ROBOT.drive.setAprilTagAlignment(AprilTagAlignState.LEFT); }, g.ROBOT.drive));
      g.OI.BB_APRIL_RIGHT.onTrue(new InstantCommand(() ->{ g.ROBOT.drive.setAprilTagAlignment(AprilTagAlignState.RIGHT); }, g.ROBOT.drive));
