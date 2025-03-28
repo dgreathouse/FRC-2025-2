@@ -29,7 +29,7 @@ public class AutoDriveDelay extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
+    g.ROBOT.drive.driveFieldCentric(0, 0, 0, g.ROBOT.angleActual_deg, g.DRIVETRAIN.ZERO_CENTER_OF_ROTATION_m);
   }
 
   // Called once the command ends or is interrupted.
