@@ -90,8 +90,8 @@ public class VisionProcessor implements IUpdateDashboard{
         double x,y,cx,cy;
 
         apriltagPose.add(new ApriltagPose(0, 0, 0, 0, 0, 0, 0));  // ID 0 which does not exist on the map
-        apriltagPose.add(new ApriltagPose(15.9576, 0.6263, 16.9339, 1.3429, 16.9408, 1.15, 126));  // ID 1 red left station. Only care about center at this point
-        apriltagPose.add(new ApriltagPose(16.9339, 6.6872, 15.9476, 7.4039, 16.385, 7.5539, -126));  //  ID 2 red right station. Only care about center at this point
+        apriltagPose.add(new ApriltagPose(15.9576, 0.6263, 16.9339, 1.3429, 16.525, .5, 126));  // ID 1 red left station. Only care about center at this point
+        apriltagPose.add(new ApriltagPose(16.9339, 6.6872, 15.9476, 7.4039, 16.525, 7.7, -126));  //  ID 2 red right station. Only care about center at this point
         apriltagPose.add(new ApriltagPose(0, 0, 0, 0, 0, 0, 0));  // ID 3 red processor. Only care about center at this point
         apriltagPose.add(new ApriltagPose(0, 0, 0, 0, 0, 0, 0));  // ID 4
         apriltagPose.add(new ApriltagPose(0, 0, 0, 0, 0, 0, 0));  // ID 5

@@ -63,19 +63,19 @@ public class CoralLift extends SubsystemBase implements IUpdateDashboard {
     double speed = 0;
     switch (_state) {
       case ALGAE_HIGH:
-        speed = 0.45;
+        speed = 0.5;
         break;
       case ALGAE_LOW:
-        speed = 0.45;
+        speed = 0.5;
         break;
       case L1:
         speed = 0.1;
         break;
       case L2:
-        speed = 0.2;
+        speed = 0.175;
         break;
       case L3:
-        speed = 0.2;
+        speed = 0.175;
         break;
       case START:
         break;
