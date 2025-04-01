@@ -1,0 +1,782 @@
+{
+  "version": 1.0,
+  "grid_size": 32,
+  "tabs": [
+    {
+      "name": "Teleoperated",
+      "grid_layout": {
+        "layouts": [],
+        "containers": [
+          {
+            "title": "Autonomouse Play",
+            "x": 672.0,
+            "y": 0.0,
+            "width": 320.0,
+            "height": 128.0,
+            "type": "ComboBox Chooser",
+            "properties": {
+              "topic": "/SmartDashboard/Autonomouse Play",
+              "period": 0.06,
+              "sort_options": false
+            }
+          },
+          {
+            "title": "GyroPrimary_deg",
+            "x": 1024.0,
+            "y": 0.0,
+            "width": 192.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Robot/GyroPrimary_deg",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "GyroSecondary_deg",
+            "x": 1024.0,
+            "y": 128.0,
+            "width": 192.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Robot/GyroSecondary_deg",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "Vision Field2d",
+            "x": 1472.0,
+            "y": 0.0,
+            "width": 448.0,
+            "height": 256.0,
+            "type": "Field",
+            "properties": {
+              "topic": "/SmartDashboard/Vision/Vision Field2d",
+              "period": 0.06,
+              "field_game": "Reefscape",
+              "robot_width": 0.85,
+              "robot_length": 0.85,
+              "show_other_objects": true,
+              "show_trajectories": true,
+              "field_rotation": 0.0,
+              "robot_color": 4294198070,
+              "trajectory_color": 4294967295
+            }
+          },
+          {
+            "title": "Drive Field2d",
+            "x": 1472.0,
+            "y": 256.0,
+            "width": 448.0,
+            "height": 256.0,
+            "type": "Field",
+            "properties": {
+              "topic": "/SmartDashboard/Robot/Drive Field2d",
+              "period": 0.06,
+              "field_game": "Reefscape",
+              "robot_width": 0.85,
+              "robot_length": 0.85,
+              "show_other_objects": true,
+              "show_trajectories": true,
+              "field_rotation": 0.0,
+              "robot_color": 4294198070,
+              "trajectory_color": 4294967295
+            }
+          },
+          {
+            "title": "AlignState",
+            "x": 1248.0,
+            "y": 128.0,
+            "width": 192.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Robot/AlignState",
+              "period": 0.06,
+              "data_type": "string",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "Apriltag AlignState",
+            "x": 1248.0,
+            "y": 0.0,
+            "width": 192.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Vision/Apriltag AlignState",
+              "period": 0.06,
+              "data_type": "string",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "angleTarget_deg",
+            "x": 1024.0,
+            "y": 608.0,
+            "width": 192.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Robot/angleTarget_deg",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "Drive Mode",
+            "x": 672.0,
+            "y": 128.0,
+            "width": 320.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Drive/Drive Mode",
+              "period": 0.06,
+              "data_type": "string",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "SpeedScale",
+            "x": 672.0,
+            "y": 256.0,
+            "width": 320.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Drive/SpeedScale",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "Apriltag Requested ID",
+            "x": 1248.0,
+            "y": 256.0,
+            "width": 192.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Vision/Apriltag Requested ID",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "Pose Angle",
+            "x": 1024.0,
+            "y": 256.0,
+            "width": 192.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Vision/Pose Angle",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "PD_Volts",
+            "x": 0.0,
+            "y": 576.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Robot/PD_Volts",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "PD_Amps",
+            "x": 128.0,
+            "y": 576.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Robot/PD_Amps",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "Pose Angle",
+            "x": 1024.0,
+            "y": 384.0,
+            "width": 192.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Robot/Pose Angle",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "IsGyroPrimaryActive",
+            "x": 800.0,
+            "y": 640.0,
+            "width": 192.0,
+            "height": 128.0,
+            "type": "Toggle Button",
+            "properties": {
+              "topic": "/SmartDashboard/Robot/IsGyroPrimaryActive",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Rotate",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 288.0,
+            "height": 288.0,
+            "type": "Graph",
+            "properties": {
+              "topic": "/SmartDashboard/Rotate",
+              "period": 0.033,
+              "data_type": "double",
+              "time_displayed": 20.0,
+              "color": 4278238420,
+              "line_width": 2.0
+            }
+          },
+          {
+            "title": "m_driveDistance_m",
+            "x": 0.0,
+            "y": 288.0,
+            "width": 288.0,
+            "height": 288.0,
+            "type": "Graph",
+            "properties": {
+              "topic": "/SmartDashboard/Auto/m_driveDistance_m",
+              "period": 0.033,
+              "data_type": "double",
+              "time_displayed": 20.0,
+              "color": 4278238420,
+              "line_width": 2.0
+            }
+          },
+          {
+            "title": "AngleFCTurnPid",
+            "x": 384.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 384.0,
+            "type": "PIDController",
+            "properties": {
+              "topic": "/SmartDashboard/Drive/AngleFCTurnPid",
+              "period": 0.06
+            }
+          },
+          {
+            "title": "Arm Angle",
+            "x": 672.0,
+            "y": 512.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/CoralLift/Arm Angle",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "CL_State",
+            "x": 832.0,
+            "y": 512.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/CoralLift/CL_State",
+              "period": 0.06,
+              "data_type": "string",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "Lift Distance mm",
+            "x": 1664.0,
+            "y": 512.0,
+            "width": 256.0,
+            "height": 256.0,
+            "type": "Graph",
+            "properties": {
+              "topic": "/SmartDashboard/CoralLift/Lift Distance mm",
+              "period": 0.033,
+              "data_type": "double",
+              "time_displayed": 5.0,
+              "color": 4278238420,
+              "line_width": 2.0
+            }
+          },
+          {
+            "title": "IsVisionEnabled",
+            "x": 768.0,
+            "y": 384.0,
+            "width": 192.0,
+            "height": 128.0,
+            "type": "Toggle Button",
+            "properties": {
+              "topic": "/SmartDashboard/Robot/IsVisionEnabled",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "AutoDelay_sec",
+            "x": 512.0,
+            "y": 416.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Auto/AutoDelay_sec",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "CoralLiftSubsystem",
+            "x": 288.0,
+            "y": 576.0,
+            "width": 352.0,
+            "height": 128.0,
+            "type": "Subsystem",
+            "properties": {
+              "topic": "/SmartDashboard/CoralLift/CoralLiftSubsystem",
+              "period": 0.06
+            }
+          },
+          {
+            "title": "m_driveAngle_deg",
+            "x": 288.0,
+            "y": 448.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Auto/m_driveAngle_deg",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "Target Distance",
+            "x": 1248.0,
+            "y": 512.0,
+            "width": 384.0,
+            "height": 224.0,
+            "type": "Graph",
+            "properties": {
+              "topic": "/SmartDashboard/Vision/Target Distance",
+              "period": 0.033,
+              "data_type": "double",
+              "time_displayed": 5.0,
+              "color": 4278238420,
+              "line_width": 2.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Swerve",
+      "grid_layout": {
+        "layouts": [],
+        "containers": [
+          {
+            "title": "DriveActualVelocityF",
+            "x": 480.0,
+            "y": 32.0,
+            "width": 224.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Swerve/DriveActualVelocityF",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "DriveSetVelocityF",
+            "x": 480.0,
+            "y": 160.0,
+            "width": 224.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Swerve/DriveSetVelocityF",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "SteerActualAng F",
+            "x": 736.0,
+            "y": 32.0,
+            "width": 224.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Swerve/SteerActualAng F",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "SteerSetAng F",
+            "x": 736.0,
+            "y": 160.0,
+            "width": 224.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Swerve/SteerSetAng F",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "DriveVolts F",
+            "x": 480.0,
+            "y": 448.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Swerve/DriveVolts F",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "DriveVolts BR",
+            "x": 608.0,
+            "y": 448.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Swerve/DriveVolts BR",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "DriveVolts BL",
+            "x": 736.0,
+            "y": 448.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Swerve/DriveVolts BL",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Auto",
+      "grid_layout": {
+        "layouts": [],
+        "containers": [
+          {
+            "title": "Autonomouse Play",
+            "x": 512.0,
+            "y": 0.0,
+            "width": 192.0,
+            "height": 128.0,
+            "type": "ComboBox Chooser",
+            "properties": {
+              "topic": "/SmartDashboard/Autonomouse Play",
+              "period": 0.06,
+              "sort_options": false
+            }
+          },
+          {
+            "title": "m_speeds.vyMetersPerSecond",
+            "x": 512.0,
+            "y": 128.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Drive/m_speeds.vyMetersPerSecond",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "m_speeds.vxMetersPerSecond",
+            "x": 512.0,
+            "y": 256.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Drive/m_speeds.vxMetersPerSecond",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "m_speeds.omegaRadiansPerSecond",
+            "x": 512.0,
+            "y": 384.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Drive/m_speeds.omegaRadiansPerSecond",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "Drive Mode",
+            "x": 896.0,
+            "y": 0.0,
+            "width": 192.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Drive/Drive Mode",
+              "period": 0.06,
+              "data_type": "string",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "Speed Actual",
+            "x": 896.0,
+            "y": 128.0,
+            "width": 192.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Drive/Speed Actual",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "Speed Requested",
+            "x": 896.0,
+            "y": 256.0,
+            "width": 192.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Drive/Speed Requested",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "Subsystem",
+            "x": 1120.0,
+            "y": 0.0,
+            "width": 384.0,
+            "height": 128.0,
+            "type": "Subsystem",
+            "properties": {
+              "topic": "/SmartDashboard/Drive/Subsystem",
+              "period": 0.06
+            }
+          },
+          {
+            "title": "TurnPID",
+            "x": 1632.0,
+            "y": 288.0,
+            "width": 256.0,
+            "height": 384.0,
+            "type": "PIDController",
+            "properties": {
+              "topic": "/SmartDashboard/Auto/TurnPID",
+              "period": 0.06
+            }
+          },
+          {
+            "title": "DrivePID",
+            "x": 1376.0,
+            "y": 288.0,
+            "width": 256.0,
+            "height": 384.0,
+            "type": "PIDController",
+            "properties": {
+              "topic": "/SmartDashboard/Auto/DrivePID",
+              "period": 0.06
+            }
+          },
+          {
+            "title": "GyroPrimary_deg",
+            "x": 896.0,
+            "y": 416.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Robot/GyroPrimary_deg",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "RotateTurnPID",
+            "x": 1120.0,
+            "y": 288.0,
+            "width": 256.0,
+            "height": 384.0,
+            "type": "PIDController",
+            "properties": {
+              "topic": "/SmartDashboard/Auto/RotateTurnPID",
+              "period": 0.06
+            }
+          },
+          {
+            "title": "Pose2d_X",
+            "x": 512.0,
+            "y": 544.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Auto/Pose2d_X",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "Pose2d_Y",
+            "x": 640.0,
+            "y": 544.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Auto/Pose2d_Y",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "m_driveDistance_m",
+            "x": 128.0,
+            "y": 512.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Auto/m_driveDistance_m",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "m_driveAngle_deg",
+            "x": 128.0,
+            "y": 384.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Auto/m_driveAngle_deg",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Field",
+      "grid_layout": {
+        "layouts": [],
+        "containers": [
+          {
+            "title": "Vision Field2d",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 960.0,
+            "height": 736.0,
+            "type": "Field",
+            "properties": {
+              "topic": "/SmartDashboard/Vision/Vision Field2d",
+              "period": 0.06,
+              "field_game": "Reefscape",
+              "robot_width": 0.85,
+              "robot_length": 0.85,
+              "show_other_objects": true,
+              "show_trajectories": true,
+              "field_rotation": 0.0,
+              "robot_color": 4294198070,
+              "trajectory_color": 4294967295
+            }
+          },
+          {
+            "title": "Drive Field2d",
+            "x": 960.0,
+            "y": 0.0,
+            "width": 960.0,
+            "height": 736.0,
+            "type": "Field",
+            "properties": {
+              "topic": "/SmartDashboard/Robot/Drive Field2d",
+              "period": 0.06,
+              "field_game": "Reefscape",
+              "robot_width": 0.85,
+              "robot_length": 0.85,
+              "show_other_objects": true,
+              "show_trajectories": true,
+              "field_rotation": 0.0,
+              "robot_color": 4294198070,
+              "trajectory_color": 4294967295
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
